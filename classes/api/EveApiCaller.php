@@ -34,6 +34,12 @@ class EveApiCaller {
 	 * @var Parameters for call.
 	 */
 	protected $mCallData;
+	
+	/**
+	 * 
+	 * @var Debug mode enabled
+	 */
+	protected $mDebugMode;
 
 	/**
 	 * Constructor of caller.
@@ -52,6 +58,7 @@ class EveApiCaller {
 	 */
 	public function __construct($_methodData, $_callData = array(), $_userData = null, $debug = false)
 	{
+		$this->mDebugMode = true;
 		if ($_methodData == null) {
 			throw new \Exception("Method data missing");
 		}
@@ -90,20 +97,45 @@ class EveApiCaller {
 		$success = false;
 		$error = '';
 		$serverResponse = '';
-		
+
+		if ($this->mDebugMode == true) {
+			echo "Checking cache...\n";
+		}
+
 		// check for cached answer
 		$cachedRecord = $this->cachedAnswer($targetUrlWS);
 		
 		if (empty($cachedRecord)) {
+			if ($this->mDebugMode == true) {
+				echo "Cache empty. Need reload...\n";
+			}
+
 			$needReload = true;
 		} else {
 			$cached = \DateTime::createFromFormat('Y-m-d H:i:s', $cachedRecord[0]->cached, new \DateTimeZone('UTC'));
 			$cachedUntil = \DateTime::createFromFormat('Y-m-d H:i:s', $cachedRecord[0]->cachedUntil, new \DateTimeZone('UTC'));
 			$now = new \DateTime("now", new \DateTimeZone('UTC'));
-			
+
+			if ($this->mDebugMode == true) {
+				echo "Cached record found.\n";
+				echo "Cached until: ";
+				print_r($cachedUntil);
+				echo "\nCurrent time: ";
+				print_r($now);
+				echo "\n";
+			}
+
 			if ($cachedUntil < $now) {
+				if ($this->mDebugMode == true) {
+					echo "Cached record obsolete. Need reload.\n";
+				}
+
 				$needReload = true;
 			} else {
+				if ($this->mDebugMode == true) {
+					echo "Get from cache.\n";
+				}
+
 				$serverResponse = $cachedRecord[0]->result;
 				$success = true;
 				$needCache = false;
@@ -112,6 +144,10 @@ class EveApiCaller {
 		//print_r($serverResponse);
 		
 		if ($needReload == true) {
+			if ($this->mDebugMode == true) {
+				echo "Reloading...\n";
+			}
+
 			// send request
 			$curl = curl_init();
 			curl_setopt($curl, CURLOPT_URL, $targetUrlWS);
@@ -122,16 +158,33 @@ class EveApiCaller {
 			// if error detected
 			$matches = array();
 			if (preg_match('/\<html\>\<body\>(.*)\<\/body\>\<\/html\>/i', $serverResponse, $matches)) { // || strlen($serverResponse) < 10 || )
-				//
+				if ($this->mDebugMode == true) {
+					echo "Html answer detected.\n";
+				}
+
 				$error = $matches[1];
 				$success = false;
 				$needCache = false;
 			} else {
 				// check for error in xml
-				if (preg_match("/eveapi/i", $serverResponse) != 0) {
+				if (preg_match("/\<error.+?\>(.+?)\<\/error\>/i", $serverResponse, $matches) != 0) {
+					if ($this->mDebugMode == true) {
+						echo "<error> tag detected:\n";
+						echo $matches[1];
+						echo "\n";
+					}
+
+					$error = $matches[1];
+					$success = false;
+					$needCache = false;
+				} else if (preg_match("/eveapi/i", $serverResponse, $matches) != 0) {
 					$success = true;
 					$needCache = true;
 				} else {
+					if ($this->mDebugMode == true) {
+						echo "<eveapi> tag not found in xml.\n";
+					}
+
 					$error = 'Data received without <eveapi/> xml';
 					$success = false;
 					$needCache = false;
@@ -141,6 +194,10 @@ class EveApiCaller {
 
 		// process answer
 		if ($success == true) {
+			if ($this->mDebugMode == true) {
+				echo "Processing answer...\n";
+			}
+
 			// parse answer
 			$domDoc = new \DOMDocument('1.0', 'UTF-8');
 			$domDoc->loadXML($serverResponse);
@@ -153,6 +210,10 @@ class EveApiCaller {
 			$cachedUntil = $nodeCachedUntil->nodeValue;
 			
 			if ($needCache == true) {
+				if ($this->mDebugMode == true) {
+					echo "Save answer to cache.\n";
+				}
+
 				DB::table('riuson_eveapi_cache')->insert(array(
 					'uri' => $targetUrlWS,
 					'cached' => $cached,
@@ -161,9 +222,17 @@ class EveApiCaller {
 				));
 			}
 			
+			if ($this->mDebugMode == true) {
+				echo "Create answer class instance...\n";
+			}
+
 			$answerClassName = $_methodData->answerClassName();
 			$result = new $answerClassName($domPath);
 		} else {
+			if ($this->mDebugMode == true) {
+				echo "Create failed answer instance.\n";
+			}
+
 			// create failed answer
 			$result = new FailedCall($error);
 		}
@@ -187,5 +256,10 @@ class EveApiCaller {
 			->take(1)
 			->get();
 		return $result;
+	}
+
+	public function setDebug($_value)
+	{
+		$this->mDebugMode = $_value;
 	}
 }

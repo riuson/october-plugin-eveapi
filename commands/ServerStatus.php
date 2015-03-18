@@ -3,11 +3,11 @@
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
-use riuson\EveApi\Classes\EveApiUserData;
-use riuson\EveApi\Classes\EveApiCallsLibraryItem;
-use riuson\EveApi\Classes\EveApiCallsLibrary;
-use riuson\EveApi\Classes\EveApiCaller;
-use riuson\EveApi\Classes\riuson\EveApi\Classes;
+use riuson\EveApi\Classes\Api\EveApiUserData;
+use riuson\EveApi\Classes\Api\EveApiCallsLibraryItem;
+use riuson\EveApi\Classes\Api\EveApiCallsLibrary;
+use riuson\EveApi\Classes\Api\EveApiCaller;
+use riuson\EveApi\Classes\Api;
 
 class ServerStatus extends Command {
 

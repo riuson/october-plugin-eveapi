@@ -1,4 +1,4 @@
-<?php namespace riuson\EveApi\Classes;
+<?php namespace riuson\EveApi\Classes\Api;
 
 /**
  * Library item with basic data collection.

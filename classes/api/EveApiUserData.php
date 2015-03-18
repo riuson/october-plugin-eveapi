@@ -1,4 +1,4 @@
-<?php namespace riuson\EveApi\Classes;
+<?php namespace riuson\EveApi\Classes\Api;
 
 /**
  * User Data for API request

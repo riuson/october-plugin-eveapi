@@ -1,8 +1,8 @@
-<?php namespace riuson\EveApi\Classes;
+<?php namespace riuson\EveApi\Classes\Api;
 
-use riuson\EveApi\Classes\EveApiUserData;
-use riuson\EveApi\Classes\EveApiCallsLibraryItem;
-use riuson\EveApi\Classes\EveApiCallsLibrary;
+use riuson\EveApi\Classes\Api\EveApiUserData;
+use riuson\EveApi\Classes\Api\EveApiCallsLibraryItem;
+use riuson\EveApi\Classes\Api\EveApiCallsLibrary;
 use DB;
 use riuson\EveApi\Commands\ServerStatus;
 

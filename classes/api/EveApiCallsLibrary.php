@@ -1,6 +1,6 @@
-<?php namespace riuson\EveApi\Classes;
+<?php namespace riuson\EveApi\Classes\Api;
 
-use riuson\EveApi\Classes\EveApiCallsLibraryItem;
+use riuson\EveApi\Classes\Api\EveApiCallsLibraryItem;
 
 /**
  * Calls library

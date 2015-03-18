@@ -236,9 +236,11 @@ class EveApiCaller {
 			// create failed answer
 			$result = new FailedCall($error);
 		}
-		
-		//echo $serverResponse;
-		//echo "\n";
+
+		if ($this->mDebugMode == true) {
+			print_r($result);
+			echo "\n";
+		}
 
 		return $result;
 	}

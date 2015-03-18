@@ -9,7 +9,7 @@ class EveApiCallsLibrary {
 
 	public static function server_serverStatus()
 	{
-		$result = new EveApiCallsLibraryItem("/server/ServerStatus.xml.aspx", 0, "Server Status");
+		$result = new EveApiCallsLibraryItem("/server/ServerStatus.xml.aspx", 0, "Server Status", "riuson\EveApi\Classes\Api\Server\ServerStatus");
 		return $result;
 	}
 

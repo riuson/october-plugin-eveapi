@@ -160,6 +160,9 @@ class EveApiCaller {
 					'result' => $serverResponse
 				));
 			}
+			
+			$answerClassName = $_methodData->answerClassName();
+			$result = new $answerClassName($domPath);
 		} else {
 			// create failed answer
 		}

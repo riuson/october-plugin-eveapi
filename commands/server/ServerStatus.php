@@ -1,4 +1,4 @@
-<?php namespace riuson\EveApi\Commands;
+<?php namespace riuson\EveApi\Commands\Server;
 
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
@@ -15,7 +15,7 @@ class ServerStatus extends Command {
 	 *
 	 * @var string The console command name
 	 */
-	protected $name = "eveapi:server-status";
+	protected $name = "eveapi:server/server-status";
 
 	/**
 	 *

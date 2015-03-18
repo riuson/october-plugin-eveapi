@@ -165,6 +165,7 @@ class EveApiCaller {
 			$result = new $answerClassName($domPath);
 		} else {
 			// create failed answer
+			$result = new FailedCall($error);
 		}
 		
 		//echo $serverResponse;

@@ -170,6 +170,8 @@ class EveApiCaller {
 		
 		//echo $serverResponse;
 		//echo "\n";
+
+		return $result;
 	}
 
 	private function clearCache()

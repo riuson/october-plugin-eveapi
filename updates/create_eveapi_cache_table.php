@@ -19,7 +19,6 @@ class CreateCacheTable extends Migration
             $table->datetime('cached');
             $table->datetime('cachedUntil');
             $table->longtext('result');
-            $table->text('error');
 
             //$table->index('uri');
         });

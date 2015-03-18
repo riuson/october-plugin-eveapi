@@ -52,6 +52,12 @@ class ServerStatus extends Command {
 			// $this->output->writeln(sprintf("uri: %s", $methodInfo->uri()));
 
 			$caller = new EveApiCaller($methodInfo, array(), $userCredentials, true);
+
+			if ($debug) {
+				$caller->setDebug(true);
+			}
+
+			$caller->call();
 		} catch (Exception $e) {
 			if ($debug) {
 				$this->output->writeln($e->getMessage());

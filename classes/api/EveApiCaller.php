@@ -58,27 +58,30 @@ class EveApiCaller {
 	 */
 	public function __construct($_methodData, $_callData = array(), $_userData = null, $debug = false)
 	{
-		$this->mDebugMode = true;
 		if ($_methodData == null) {
 			throw new \Exception("Method data missing");
 		}
 		
+		$this->mDebugMode = false;
 		$this->mApiMethodData = $_methodData;
 		$this->mCallData = $_callData;
-		$this->mUserCredentials = $_userData;
-		
+		$this->mUserCredentials = $_userData;	
+	}
+
+	public function call()
+	{
 		// base url
-		$targetUrl = $this->mApiUrl . $_methodData->uri() . "?";
+		$targetUrl = $this->mApiUrl . $this->mApiMethodData->uri() . "?";
 		
-		$params = $_callData;
+		$params = $this->mCallData;
 		
 		// if user credendtials present, add to parameters
-		if ($_userData != null) {
-			$params["keyID"] = $_userData->keyId;
-			$params["vCode"] = $_userData->verificationCode;
+		if ($this->mUserCredentials != null) {
+			$params["keyID"] = $this->mUserCredentials->keyId;
+			$params["vCode"] = $this->mUserCredentials->verificationCode;
 			
-			if ($_userData->characterId != 0) {
-				$params["characterID"] = $_userData->characterId;
+			if ($this->mUserCredentials->characterId != 0) {
+				$params["characterID"] = $this->mUserCredentials->characterId;
 			}
 		}
 		
@@ -226,7 +229,7 @@ class EveApiCaller {
 				echo "Create answer class instance...\n";
 			}
 
-			$answerClassName = $_methodData->answerClassName();
+			$answerClassName = $this->mApiMethodData->answerClassName();
 			$result = new $answerClassName($domPath);
 		} else {
 			if ($this->mDebugMode == true) {

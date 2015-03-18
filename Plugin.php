@@ -26,5 +26,6 @@ class Plugin extends PluginBase
     public function register()
     {
         $this->registerConsoleCommand('eveapi.server.serverstatus', 'riuson\EveApi\Commands\Server\ServerStatus');
+        $this->registerConsoleCommand('eveapi.account.accountstatus', 'riuson\EveApi\Commands\Account\AccountStatus');
     }
 }

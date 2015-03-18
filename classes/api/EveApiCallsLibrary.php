@@ -15,7 +15,7 @@ class EveApiCallsLibrary {
 
 	public static function account_accountStatus()
 	{
-		$result = new EveApiCallsLibraryItem("/account/AccountStatus.xml.aspx", 33554432, "Account Status", array(
+		$result = new EveApiCallsLibraryItem("/account/AccountStatus.xml.aspx", 33554432, "Account Status", "riuson\EveApi\Classes\Api\Account\AccountStatus", array(
 			"keyId",
 			"verificationCode"
 		));

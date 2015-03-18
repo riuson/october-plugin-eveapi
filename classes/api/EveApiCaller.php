@@ -112,8 +112,8 @@ class EveApiCaller {
 
 			$needReload = true;
 		} else {
-			$cached = \DateTime::createFromFormat('Y-m-d H:i:s', $cachedRecord[0]->cached, new \DateTimeZone('UTC'));
-			$cachedUntil = \DateTime::createFromFormat('Y-m-d H:i:s', $cachedRecord[0]->cachedUntil, new \DateTimeZone('UTC'));
+			$cached = $this->stringToTime($cachedRecord[0]->cached);
+			$cachedUntil = $this->stringToTime($cachedRecord[0]->cachedUntil);
 			$now = new \DateTime("now", new \DateTimeZone('UTC'));
 
 			if ($this->mDebugMode == true) {
@@ -257,6 +257,12 @@ class EveApiCaller {
 			->orderBy('cached', 'DESC')
 			->take(1)
 			->get();
+		return $result;
+	}
+
+	private function stringToTime($_value)
+	{
+		$result = \DateTime::createFromFormat('Y-m-d H:i:s', $_value, new \DateTimeZone('UTC'));
 		return $result;
 	}
 

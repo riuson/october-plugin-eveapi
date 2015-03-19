@@ -52,11 +52,8 @@ class EveApiCaller {
 	 *        	
 	 * @param \riuson\EveApi\Classes\EveApiUserData $_userData
 	 *        	User data for protected calls.
-	 *        	
-	 * @param bool $_debug
-	 *        	Show debug output.
 	 */
-	public function __construct($_methodData, $_callData = array(), $_userData = null, $debug = false)
+	public function __construct($_methodData, $_callData = array(), $_userData = null)
 	{
 		if ($_methodData == null) {
 			throw new \Exception("Method data missing");

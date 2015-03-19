@@ -37,21 +37,15 @@ class AccountStatus extends Command {
 	public function fire()
 	{
 		$debug = $this->option('debug');
+		$keyId = $this->option('keyId');
+		$vCode = $this->option('vCode');
 
 		$this->output->writeln(static::class);
 
 		try {
-			$userCredentials = new EveApiUserData(0, '000');
-			// $this->output->writeln(sprintf("key id: %d", $userCredentials->keyId));
-			// $this->output->writeln(sprintf("vcode: %s", $userCredentials->verificationCode));
-			// $this->output->writeln(sprintf("charid: %s", $userCredentials->characterId));
-
+			$userCredentials = new EveApiUserData(intval($keyId), $vCode);
 			$methodInfo = EveApiCallsLibrary::account_accountStatus();
-			// $this->output->writeln(sprintf("common name: %s", $methodInfo->commonName()));
-			// $this->output->writeln(sprintf("access mask: %d", $methodInfo->accessMask()));
-			// $this->output->writeln(sprintf("uri: %s", $methodInfo->uri()));
-
-			$caller = new EveApiCaller($methodInfo, array(), $userCredentials, true);
+			$caller = new EveApiCaller($methodInfo, array(), $userCredentials);
 
 			if ($debug) {
 				$caller->setDebug(true);

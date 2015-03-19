@@ -43,6 +43,10 @@ class AccountStatus extends Command {
 		$this->output->writeln(static::class);
 
 		try {
+			if (!isset($keyId) || !isset($vCode)) {
+				throw new \Exception("Must provide keyId and vCode!");
+			}
+
 			$userCredentials = new EveApiUserData(intval($keyId), $vCode);
 			$methodInfo = EveApiCallsLibrary::account_accountStatus();
 			$caller = new EveApiCaller($methodInfo, array(), $userCredentials);

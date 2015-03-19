@@ -21,4 +21,13 @@ class EveApiCallsLibrary {
 		));
 		return $result;
 	}
+
+	public static function account_characters()
+	{
+		$result = new EveApiCallsLibraryItem("/account/Characters.xml.aspx", 0, "List of Characters", "riuson\EveApi\Classes\Api\Account\Characters", array(
+			"keyId",
+			"verificationCode"
+		));
+		return $result;
+	}
 }

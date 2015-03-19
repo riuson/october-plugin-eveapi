@@ -11,7 +11,7 @@ class ServerStatus {
 	public function __construct($domPath)
 	{
 		$openedValue = $domPath->query('//result/serverOpen')->item(0)->nodeValue;
-		$this->mServerOpen = $openedValue === 'True'? true: false;
+		$this->mServerOpen = $openedValue === 'True' ? true : false;
 
 		$onlineValue = $domPath->query('//result/onlinePlayers')->item(0)->nodeValue;
 		$this->mOnlinePlayers = intval($onlineValue);
@@ -30,7 +30,7 @@ class ServerStatus {
 	protected $mOnlinePlayers;
 
 	/**
-	 * 
+	 *
 	 * @return boolean Is server online
 	 */
 	public function serverOpen()
@@ -39,7 +39,7 @@ class ServerStatus {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return number Number of players online
 	 */
 	public function onlinePlayers()

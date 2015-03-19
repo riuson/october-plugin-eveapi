@@ -47,9 +47,9 @@ class AccountStatus {
 	 * @var Logon minutes
 	 */
 	protected $mLogonMinutes;
-	
+
 	/**
-	 * 
+	 *
 	 * @return \DateTime Account datetime paid until
 	 */
 	public function paidUntil()
@@ -58,7 +58,7 @@ class AccountStatus {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return \DateTime Create date
 	 */
 	public function createDate()
@@ -67,7 +67,7 @@ class AccountStatus {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return integer Logon count
 	 */
 	public function logonCount()
@@ -76,7 +76,7 @@ class AccountStatus {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return integer Logon minutes
 	 */
 	public function logonMinutes()

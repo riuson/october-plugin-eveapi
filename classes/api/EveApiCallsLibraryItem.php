@@ -12,37 +12,41 @@ class EveApiCallsLibraryItem {
 	protected $mUri = null;
 
 	/**
+	 *
 	 * @var Access mask of the key, required for request
 	 */
 	protected $mAccessMask = 0;
 
 	/**
+	 *
 	 * @var Common name of the API function
 	 */
 	protected $mCommonName = null;
 
 	/**
+	 *
 	 * @var List of required parameters for API call
 	 */
 	protected $mRequiredParameters = null;
 
 	/**
+	 *
 	 * @var Name of class for answer
 	 */
 	protected $mAnswerClassName = '';
-	
+
 	/**
 	 * Constructor with credentials.
 	 *
 	 * @param string $_uri
 	 *        	Access mask of the key, required for request
-	 *        	
+	 *
 	 * @param int $_accessMask
 	 *        	Access mask of the key, required for request
-	 *        	
+	 *
 	 * @param string $_commonName
 	 *        	Common name of the API function
-	 *        	
+	 *
 	 * @param array $_parameters
 	 *        	List of required parameters for API call
 	 */
@@ -56,9 +60,8 @@ class EveApiCallsLibraryItem {
 	}
 
 	/**
-	 * 
-	 * @return string
-	 * Gets Uri of the API request
+	 *
+	 * @return string Gets Uri of the API request
 	 */
 	public function uri()
 	{
@@ -66,9 +69,8 @@ class EveApiCallsLibraryItem {
 	}
 
 	/**
-	 * 
-	 * @return integer
-	 * Gets access mask of the key, required for request
+	 *
+	 * @return integer Gets access mask of the key, required for request
 	 */
 	public function accessMask()
 	{
@@ -76,9 +78,8 @@ class EveApiCallsLibraryItem {
 	}
 
 	/**
-	 * 
-	 * @return string
-	 * Common name of the API function
+	 *
+	 * @return string Common name of the API function
 	 */
 	public function commonName()
 	{
@@ -86,9 +87,8 @@ class EveApiCallsLibraryItem {
 	}
 
 	/**
-	 * 
-	 * @return array
-	 * List of required parameters for API call
+	 *
+	 * @return array List of required parameters for API call
 	 */
 	public function requiredParameters()
 	{
@@ -96,9 +96,8 @@ class EveApiCallsLibraryItem {
 	}
 
 	/**
-	 * 
-	 * @return string
-	 * Class name of the answer
+	 *
+	 * @return string Class name of the answer
 	 */
 	public function answerClassName()
 	{

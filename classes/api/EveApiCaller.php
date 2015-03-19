@@ -34,9 +34,9 @@ class EveApiCaller {
 	 * @var Parameters for call.
 	 */
 	protected $mCallData;
-	
+
 	/**
-	 * 
+	 *
 	 * @var Debug mode enabled
 	 */
 	protected $mDebugMode;
@@ -46,10 +46,10 @@ class EveApiCaller {
 	 *
 	 * @param \riuson\EveApi\Classes\EveApiCallsLibraryItem $_methodData
 	 *        	Static information about api call.
-	 *        	
+	 *
 	 * @param array $_callData
 	 *        	Parameters for call.
-	 *        	
+	 *
 	 * @param \riuson\EveApi\Classes\EveApiUserData $_userData
 	 *        	User data for protected calls.
 	 */
@@ -58,39 +58,39 @@ class EveApiCaller {
 		if ($_methodData == null) {
 			throw new \Exception("Method data missing");
 		}
-		
+
 		$this->mDebugMode = false;
 		$this->mApiMethodData = $_methodData;
 		$this->mCallData = $_callData;
-		$this->mUserCredentials = $_userData;	
+		$this->mUserCredentials = $_userData;
 	}
 
 	public function call()
 	{
 		// base url
 		$targetUrl = $this->mApiUrl . $this->mApiMethodData->uri() . "?";
-		
+
 		$params = $this->mCallData;
-		
+
 		// if user credendtials present, add to parameters
 		if ($this->mUserCredentials != null) {
 			$params["keyID"] = $this->mUserCredentials->keyId;
 			$params["vCode"] = $this->mUserCredentials->verificationCode;
-			
+
 			if ($this->mUserCredentials->characterId != 0) {
 				$params["characterID"] = $this->mUserCredentials->characterId;
 			}
 		}
-		
+
 		// append to url, GET
 		foreach ($params as $k => $v) {
 			$targetUrl .= $k . "=" . $v . "&";
 		}
-		
+
 		$targetUrl = substr($targetUrl, 0, strlen($targetUrl) - 1);
 		$targetUrlWS = str_replace(" ", "%20", $targetUrl);
 		// echo $targetUrl;
-		
+
 		$result = array();
 		$needReload = false;
 		$needCache = false;
@@ -104,7 +104,7 @@ class EveApiCaller {
 
 		// check for cached answer
 		$cachedRecord = $this->cachedAnswer($targetUrlWS);
-		
+
 		if (empty($cachedRecord)) {
 			if ($this->mDebugMode == true) {
 				echo "Cache empty. Need reload...\n";
@@ -141,8 +141,8 @@ class EveApiCaller {
 				$needCache = false;
 			}
 		}
-		//print_r($serverResponse);
-		
+		// print_r($serverResponse);
+
 		if ($needReload == true) {
 			if ($this->mDebugMode == true) {
 				echo "Reloading...\n";
@@ -154,7 +154,7 @@ class EveApiCaller {
 			curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 			$serverResponse = curl_exec($curl);
 			curl_close($curl);
-			
+
 			// if error detected
 			$matches = array();
 			if (preg_match('/\<html\>\<body\>(.*)\<\/body\>\<\/html\>/i', $serverResponse, $matches)) { // || strlen($serverResponse) < 10 || )
@@ -177,18 +177,19 @@ class EveApiCaller {
 					$error = $matches[1];
 					$success = false;
 					$needCache = false;
-				} else if (preg_match("/eveapi/i", $serverResponse, $matches) != 0) {
-					$success = true;
-					$needCache = true;
-				} else {
-					if ($this->mDebugMode == true) {
-						echo "<eveapi> tag not found in xml.\n";
-					}
+				} else
+					if (preg_match("/eveapi/i", $serverResponse, $matches) != 0) {
+						$success = true;
+						$needCache = true;
+					} else {
+						if ($this->mDebugMode == true) {
+							echo "<eveapi> tag not found in xml.\n";
+						}
 
-					$error = 'Data received without <eveapi/> xml';
-					$success = false;
-					$needCache = false;
-				}
+						$error = 'Data received without <eveapi/> xml';
+						$success = false;
+						$needCache = false;
+					}
 			}
 		}
 
@@ -202,13 +203,13 @@ class EveApiCaller {
 			$domDoc = new \DOMDocument('1.0', 'UTF-8');
 			$domDoc->loadXML($serverResponse);
 			$domPath = new \DOMXPath($domDoc);
-			
+
 			$nodeCurrentTime = $domPath->query('currentTime')->item(0);
 			$cached = $nodeCurrentTime->nodeValue;
-			
+
 			$nodeCachedUntil = $domPath->query('cachedUntil')->item(0);
 			$cachedUntil = $nodeCachedUntil->nodeValue;
-			
+
 			if ($needCache == true) {
 				if ($this->mDebugMode == true) {
 					echo "Save answer to cache.\n";
@@ -221,7 +222,7 @@ class EveApiCaller {
 					'result' => $serverResponse
 				));
 			}
-			
+
 			if ($this->mDebugMode == true) {
 				echo "Create answer class instance...\n";
 			}

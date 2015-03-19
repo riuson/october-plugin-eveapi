@@ -2,7 +2,7 @@
 
 /**
  * User Data for API request
- * 
+ *
  * @package riuson\EveApi\Classes
  * @author riuson
  */
@@ -31,10 +31,10 @@ class EveApiUserData {
 	 *
 	 * @param integer $_keyId
 	 *        	The ID of the Customizable API Key for authentication, found at: https://support.eveonline.com/api
-	 *        	
+	 *
 	 * @param string $_vCode
 	 *        	The user defined or CCP generated Verification Code for the Customizable API Key, found at https://support.eveonline.com/api
-	 *        	
+	 *
 	 * @param integer $_characterId
 	 *        	The ID of the character for the requested data, from Character List. Only for /Char/ endpoints. Optional when the API Key is only valid for a single character.
 	 */

@@ -5,27 +5,26 @@ use System\Classes\PluginBase;
 /**
  * eveapi Plugin Information File
  */
-class Plugin extends PluginBase
-{
+class Plugin extends PluginBase {
 
-    /**
-     * Returns information about this plugin.
-     *
-     * @return array
-     */
-    public function pluginDetails()
-    {
-        return [
-            'name'        => 'EveApi',
-            'description' => 'PHP interface for EVE API',
-            'author'      => 'riuson',
-            'icon'        => 'icon-leaf'
-        ];
-    }
+	/**
+	 * Returns information about this plugin.
+	 *
+	 * @return array
+	 */
+	public function pluginDetails()
+	{
+		return [
+			'name' => 'EveApi',
+			'description' => 'PHP interface for EVE API',
+			'author' => 'riuson',
+			'icon' => 'icon-leaf'
+		];
+	}
 
-    public function register()
-    {
-        $this->registerConsoleCommand('eveapi.server.serverstatus', 'riuson\EveApi\Commands\Server\ServerStatus');
-        $this->registerConsoleCommand('eveapi.account.accountstatus', 'riuson\EveApi\Commands\Account\AccountStatus');
-    }
+	public function register()
+	{
+		$this->registerConsoleCommand('eveapi.server.serverstatus', 'riuson\EveApi\Commands\Server\ServerStatus');
+		$this->registerConsoleCommand('eveapi.account.accountstatus', 'riuson\EveApi\Commands\Account\AccountStatus');
+	}
 }

@@ -41,17 +41,8 @@ class ServerStatus extends Command {
 		$this->output->writeln(static::class);
 
 		try {
-			$userCredentials = new EveApiUserData(123, 'vvvv');
-			// $this->output->writeln(sprintf("key id: %d", $userCredentials->keyId));
-			// $this->output->writeln(sprintf("vcode: %s", $userCredentials->verificationCode));
-			// $this->output->writeln(sprintf("charid: %s", $userCredentials->characterId));
-
 			$methodInfo = EveApiCallsLibrary::server_serverStatus();
-			// $this->output->writeln(sprintf("common name: %s", $methodInfo->commonName()));
-			// $this->output->writeln(sprintf("access mask: %d", $methodInfo->accessMask()));
-			// $this->output->writeln(sprintf("uri: %s", $methodInfo->uri()));
-
-			$caller = new EveApiCaller($methodInfo, array(), $userCredentials, true);
+			$caller = new EveApiCaller($methodInfo);
 
 			if ($debug) {
 				$caller->setDebug(true);

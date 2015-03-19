@@ -61,6 +61,7 @@ class AccountStatus extends Command {
 
 	protected function getArguments()
 	{
+		// name, mode, description, defaultValue
 		return [];
 	}
 
@@ -73,6 +74,20 @@ class AccountStatus extends Command {
 				null,
 				InputOption::VALUE_NONE,
 				'Show debug output.',
+				null
+			],
+			[
+				'keyId',
+				null,
+				InputOption::VALUE_REQUIRED,
+				'EVE API Key ID.',
+				null
+			],
+			[
+				'vCode',
+				null,
+				InputOption::VALUE_REQUIRED,
+				'EVE API Verification Code.',
 				null
 			]
 		];

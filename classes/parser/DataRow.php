@@ -26,8 +26,10 @@ class DataRow {
 				throw new Exception('Row has more than one child rowsets.');
 			}
 
-			$nodeRowset = $nodesRowset->item(0);
-			$this->mRowset = new DataRowset($_domPath, $nodeRowset);
+			if ($nodesRowset->length == 1) {
+				$nodeRowset = $nodesRowset->item(0);
+				$this->mRowset = new DataRowset($_domPath, $nodeRowset);
+			}
 		}
 	}
 

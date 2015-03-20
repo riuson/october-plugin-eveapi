@@ -1,5 +1,10 @@
 <?php namespace riuson\EveApi\Classes\Parser;
 
+/**
+ *
+ * @author vladimir
+ *         Rowset
+ */
 class DataRowset {
 
 	/**
@@ -24,34 +29,70 @@ class DataRowset {
 		}
 	}
 
+	/**
+	 *
+	 * @var string Name of the rowset
+	 */
 	protected $mName;
 
+	/**
+	 *
+	 * @var string Key column of the rowset
+	 */
 	protected $mKey;
 
+	/**
+	 *
+	 * @var array Columns list
+	 */
 	protected $mColumns;
 
+	/**
+	 *
+	 * @var array Child rows of rowset
+	 */
 	protected $mRows;
 
+	/**
+	 *
+	 * @return string Name of the rowset
+	 */
 	public function name()
 	{
 		return $this->mName;
 	}
 
+	/**
+	 *
+	 * @return string Key column of the rowset
+	 */
 	public function key()
 	{
 		return $this->mKey;
 	}
 
+	/**
+	 *
+	 * @return array: Columns list
+	 */
 	public function columns()
 	{
 		return $this->mColumns;
 	}
 
+	/**
+	 *
+	 * @return array: Child rows of rowset
+	 */
 	public function rows()
 	{
 		return $this->mRows;
 	}
 
+	/**
+	 *
+	 * @return integer Returns number of child rows
+	 */
 	public function rowCount()
 	{
 		return count($this->mRows);

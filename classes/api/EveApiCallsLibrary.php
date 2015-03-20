@@ -16,8 +16,8 @@ class EveApiCallsLibrary {
 	public static function account_accountStatus()
 	{
 		$result = new EveApiCallsLibraryItem("/account/AccountStatus.xml.aspx", 33554432, "Account Status", "riuson\EveApi\Classes\Api\Account\AccountStatus", array(
-			"keyId",
-			"verificationCode"
+			"keyID",
+			"vCode"
 		));
 		return $result;
 	}
@@ -25,8 +25,8 @@ class EveApiCallsLibrary {
 	public static function account_characters()
 	{
 		$result = new EveApiCallsLibraryItem("/account/Characters.xml.aspx", 0, "List of Characters", "riuson\EveApi\Classes\Api\Account\Characters", array(
-			"keyId",
-			"verificationCode"
+			"keyID",
+			"vCode"
 		));
 		return $result;
 	}

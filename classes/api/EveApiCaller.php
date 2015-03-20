@@ -42,6 +42,12 @@ class EveApiCaller {
 	protected $mDebugMode;
 
 	/**
+	 *
+	 * @var array Combined parameters list.
+	 */
+	protected $mParameters;
+
+	/**
 	 * Constructor of caller.
 	 *
 	 * @param \riuson\EveApi\Classes\EveApiCallsLibraryItem $_methodData
@@ -63,6 +69,24 @@ class EveApiCaller {
 		$this->mApiMethodData = $_methodData;
 		$this->mCallData = $_callData;
 		$this->mUserCredentials = $_userData;
+
+		$this->mParameters = $this->mCallData;
+
+		// if user credendtials present, add to parameters
+		if ($_userData != null) {
+			$this->mParameters["keyID"] = $_userData->keyId;
+			$this->mParameters["vCode"] = $_userData->verificationCode;
+
+			if ($_userData->characterId != 0) {
+				$this->mParameters["characterID"] = $_userData->characterId;
+			}
+		}
+
+		foreach ($_methodData->requiredParameters() as $key) {
+			if (!array_key_exists($key, $this->mParameters)) {
+				throw new \Exception(sprintf("Parameter '%s' missing", $key));
+			}
+		}
 	}
 
 	public function call()
@@ -70,20 +94,8 @@ class EveApiCaller {
 		// base url
 		$targetUrl = $this->mApiUrl . $this->mApiMethodData->uri() . "?";
 
-		$params = $this->mCallData;
-
-		// if user credendtials present, add to parameters
-		if ($this->mUserCredentials != null) {
-			$params["keyID"] = $this->mUserCredentials->keyId;
-			$params["vCode"] = $this->mUserCredentials->verificationCode;
-
-			if ($this->mUserCredentials->characterId != 0) {
-				$params["characterID"] = $this->mUserCredentials->characterId;
-			}
-		}
-
 		// append to url, GET
-		foreach ($params as $k => $v) {
+		foreach ($this->mParameters as $k => $v) {
 			$targetUrl .= $k . "=" . $v . "&";
 		}
 

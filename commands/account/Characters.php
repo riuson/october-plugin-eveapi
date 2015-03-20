@@ -37,14 +37,14 @@ class Characters extends Command {
 	public function fire()
 	{
 		$debug = $this->option('debug');
-		$keyId = $this->option('keyId');
+		$keyId = $this->option('keyID');
 		$vCode = $this->option('vCode');
 
 		$this->output->writeln(static::class);
 
 		try {
 			if (!isset($keyId) || !isset($vCode)) {
-				throw new \Exception("Must provide keyId and vCode!");
+				throw new \Exception("Must provide keyID and vCode!");
 			}
 
 			$userCredentials = new EveApiUserData(intval($keyId), $vCode);
@@ -81,7 +81,7 @@ class Characters extends Command {
 				null
 			],
 			[
-				'keyId',
+				'keyID',
 				null,
 				InputOption::VALUE_REQUIRED,
 				'EVE API Key ID.',

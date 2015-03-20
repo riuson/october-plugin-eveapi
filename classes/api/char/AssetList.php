@@ -2,6 +2,11 @@
 
 use riuson\EveApi\Classes\Parser\DataRowset;
 
+/**
+ *
+ * @author vladimir
+ *         Assets list
+ */
 class AssetList {
 
 	/**
@@ -16,8 +21,16 @@ class AssetList {
 		$this->mRowset = new DataRowset($_domPath, $nodeRowset);
 	}
 
+	/**
+	 *
+	 * @var DataRowset Assets rowset
+	 */
 	protected $mRowset;
 
+	/**
+	 *
+	 * @return DataRowset Returns assets rowset
+	 */
 	public function rowset()
 	{
 		return $this->mRowset;

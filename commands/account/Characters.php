@@ -43,10 +43,6 @@ class Characters extends Command {
 		$this->output->writeln(static::class);
 
 		try {
-			if (!isset($keyId) || !isset($vCode)) {
-				throw new \Exception("Must provide keyID and vCode!");
-			}
-
 			$userCredentials = new EveApiUserData(intval($keyId), $vCode);
 			$methodInfo = EveApiCallsLibrary::account_characters();
 			$caller = new EveApiCaller($methodInfo, array(), $userCredentials);

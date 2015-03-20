@@ -1,0 +1,11 @@
+<div>
+Server: <span>
+{% if __SELF__.serverOpen == true %}
+Online
+{% else %}
+Offline
+{% endif %}
+</span>
+<br>
+Players: <span>{{ __SELF__.onlinePlayers }}</span> 
+</div>

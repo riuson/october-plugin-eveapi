@@ -30,4 +30,11 @@ class Plugin extends PluginBase {
 		$this->registerConsoleCommand('eveapi.account.characters', 'riuson\EveApi\Commands\Account\Characters');
 		$this->registerConsoleCommand('eveapi.char.assetlist', 'riuson\EveApi\Commands\Char\AssetList');
 	}
+
+	public function registerComponents()
+	{
+		return [
+			'riuson\EveApi\Components\ServerStatus' => 'serverStatus'
+		];
+	}
 }

@@ -26,6 +26,7 @@ class Plugin extends PluginBase {
 	{
 		$this->registerConsoleCommand('eveapi.server.serverstatus', 'riuson\EveApi\Commands\Server\ServerStatus');
 		$this->registerConsoleCommand('eveapi.account.accountstatus', 'riuson\EveApi\Commands\Account\AccountStatus');
+		$this->registerConsoleCommand('eveapi.account.apikeyinfo', 'riuson\EveApi\Commands\Account\APIKeyInfo');
 		$this->registerConsoleCommand('eveapi.account.characters', 'riuson\EveApi\Commands\Account\Characters');
 		$this->registerConsoleCommand('eveapi.char.assetlist', 'riuson\EveApi\Commands\Char\AssetList');
 	}

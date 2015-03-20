@@ -31,6 +31,15 @@ class EveApiCallsLibrary {
 		return $result;
 	}
 
+	public static function account_apiKeyInfo()
+	{
+		$result = new EveApiCallsLibraryItem("/account/APIKeyInfo.xml.aspx", 0, "Information about the API key and a list of the characters exposed by it", "riuson\EveApi\Classes\Api\Account\APIKeyInfo", array(
+			"keyID",
+			"vCode"
+		));
+		return $result;
+	}
+
 	public static function char_assetList()
 	{
 		$result = new EveApiCallsLibraryItem("/char/AssetList.xml.aspx", 0, "List of assets owned by character", "riuson\EveApi\Classes\Api\Char\AssetList", array(

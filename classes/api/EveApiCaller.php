@@ -3,8 +3,9 @@
 use riuson\EveApi\Classes\Api\EveApiUserData;
 use riuson\EveApi\Classes\Api\EveApiCallsLibraryItem;
 use riuson\EveApi\Classes\Api\EveApiCallsLibrary;
-use DB;
-use riuson\EveApi\Commands\ServerStatus;
+use riuson\EveApi\Models;
+use Riuson\EveApi\Models\Cache;
+use Carbon\Carbon;
 
 /**
  * Class to execute request to EVE API server.
@@ -83,7 +84,7 @@ class EveApiCaller {
 		}
 
 		foreach ($_methodData->requiredParameters() as $key) {
-			if (!array_key_exists($key, $this->mParameters)) {
+			if (! array_key_exists($key, $this->mParameters)) {
 				throw new \Exception(sprintf("Parameter '%s' missing", $key));
 			}
 		}
@@ -115,18 +116,21 @@ class EveApiCaller {
 		}
 
 		// check for cached answer
-		$cachedRecord = $this->cachedAnswer($targetUrlWS);
+		$cachedRecord = Cache::where('uri', '=', $targetUrlWS)->orderBy('cached', 'DESC')
+			->take(1)
+			->get();
 
-		if (empty($cachedRecord)) {
+		// if cached record not found
+		if ($cachedRecord->isEmpty()) {
 			if ($this->mDebugMode == true) {
 				echo "Cache empty. Need reload...\n";
 			}
 
 			$needReload = true;
-		} else {
-			$cached = $this->stringToTime($cachedRecord[0]->cached);
-			$cachedUntil = $this->stringToTime($cachedRecord[0]->cachedUntil);
-			$now = new \DateTime("now", new \DateTimeZone('UTC'));
+		} else { // found
+			$cached = $cachedRecord[0]->cached;
+			$cachedUntil = $cachedRecord[0]->cachedUntil;
+			$now = Carbon::now('UTC');
 
 			if ($this->mDebugMode == true) {
 				echo "Cached record found.\n";
@@ -216,23 +220,33 @@ class EveApiCaller {
 			$domDoc->loadXML($serverResponse);
 			$domPath = new \DOMXPath($domDoc);
 
-			$nodeCurrentTime = $domPath->query('currentTime')->item(0);
-			$cached = $nodeCurrentTime->nodeValue;
-
-			$nodeCachedUntil = $domPath->query('cachedUntil')->item(0);
-			$cachedUntil = $nodeCachedUntil->nodeValue;
-
 			if ($needCache == true) {
 				if ($this->mDebugMode == true) {
 					echo "Save answer to cache.\n";
 				}
 
-				DB::table('riuson_eveapi_cache')->insert(array(
-					'uri' => $targetUrlWS,
-					'cached' => $cached,
-					'cachedUntil' => $cachedUntil,
-					'result' => $serverResponse
-				));
+				$nodeCurrentTime = $domPath->query('currentTime')->item(0);
+				$cached = Carbon::createFromFormat('Y-m-d H:i:s', $nodeCurrentTime->nodeValue, 'UTC');
+
+				$nodeCachedUntil = $domPath->query('cachedUntil')->item(0);
+				$cachedUntil = Carbon::createFromFormat('Y-m-d H:i:s', $nodeCachedUntil->nodeValue, 'UTC');
+
+				$cachedRecord = new Cache();
+				$cachedRecord->uri = $targetUrlWS;
+				$cachedRecord->method = $this->mApiMethodData->uri();
+				$cachedRecord->cached = $cached;
+				$cachedRecord->cachedUntil = $cachedUntil;
+				$cachedRecord->result = $serverResponse;
+
+				$p = '';
+				foreach ($this->mParameters as $k => $v) {
+					$p .= $k . ": " . $v . "\n";
+				}
+
+				$cachedRecord->params = preg_replace('/[\n\r]$/i', '', $p);
+				;
+
+				$cachedRecord->save();
 			}
 
 			if ($this->mDebugMode == true) {
@@ -260,23 +274,8 @@ class EveApiCaller {
 
 	private function clearCache()
 	{
-		$oldTime = date('Y-m-d H:i:s', strtotime('-2 day'));
-		DB::table('riuson_eveapi_cache')->where('cached', '<', $oldTime)->delete();
-	}
-
-	private function cachedAnswer($_uri)
-	{
-		$result = DB::table('riuson_eveapi_cache')->where('uri', '=', $_uri)
-			->orderBy('cached', 'DESC')
-			->take(1)
-			->get();
-		return $result;
-	}
-
-	private function stringToTime($_value)
-	{
-		$result = \DateTime::createFromFormat('Y-m-d H:i:s', $_value, new \DateTimeZone('UTC'));
-		return $result;
+		$beforeTime = Carbon::now('UTC')->subDay(2);
+		Cache::where('cachedUntil', '<', $beforeTime)->delete();
 	}
 
 	public function setDebug($_value)

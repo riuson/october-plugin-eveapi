@@ -84,6 +84,6 @@ class APIKeyInfo {
 	 */
 	public function rowset()
 	{
-		return $this->mCharacterRowset;
+		return $this->mCharactersRowset;
 	}
 }

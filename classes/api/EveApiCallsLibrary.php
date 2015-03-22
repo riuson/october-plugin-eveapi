@@ -24,7 +24,7 @@ class EveApiCallsLibrary {
 
 	public static function account_characters()
 	{
-		$result = new EveApiCallsLibraryItem("/account/Characters.xml.aspx", 0, "List of Characters", "riuson\EveApi\Classes\Api\Account\Characters", array(
+		$result = new EveApiCallsLibraryItem("/account/Characters.xml.aspx", 0, "List of Characters", "riuson\EveApi\Classes\Api\StandardRowset", array(
 			"keyID",
 			"vCode"
 		));
@@ -42,7 +42,7 @@ class EveApiCallsLibrary {
 
 	public static function char_assetList()
 	{
-		$result = new EveApiCallsLibraryItem("/char/AssetList.xml.aspx", 0, "List of assets owned by character", "riuson\EveApi\Classes\Api\Char\AssetList", array(
+		$result = new EveApiCallsLibraryItem("/char/AssetList.xml.aspx", 0, "List of assets owned by character", "riuson\EveApi\Classes\Api\StandardRowset", array(
 			"keyID",
 			"vCode",
 			"characterID"

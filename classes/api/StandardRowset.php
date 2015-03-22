@@ -1,12 +1,15 @@
-<?php namespace riuson\EveApi\Classes\Api\Account;
+<?php namespace riuson\EveApi\Classes\Api;
 
 use riuson\EveApi\Classes\Parser\DataRowset;
 
-class Characters {
+/**
+ * Class for typical answer, contaning only rowset
+ */
+
+class StandardRowset {
 
 	/**
 	 * Object constructor
-	 * rowset multiCharacterTraining not implemented
 	 *
 	 * @param \DOMXPath $domPath
 	 *        	XPath for source document with data
@@ -17,8 +20,16 @@ class Characters {
 		$this->mRowset = new DataRowset($_domPath, $nodeRowset);
 	}
 
+	/**
+	 *
+	 * @var DataRowset Rowset
+	 */
 	protected $mRowset;
 
+	/**
+	 *
+	 * @return DataRowset Returns rowset
+	 */
 	public function rowset()
 	{
 		return $this->mRowset;

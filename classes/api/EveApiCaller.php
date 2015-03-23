@@ -108,7 +108,8 @@ class EveApiCaller {
 		$needReload = false;
 		$needCache = false;
 		$success = false;
-		$error = '';
+		$errorCode = 0;
+		$errorText = '';
 		$serverResponse = '';
 
 		if ($this->mDebugMode == true) {
@@ -178,19 +179,19 @@ class EveApiCaller {
 					echo "Html answer detected.\n";
 				}
 
-				$error = $matches[1];
+				$errorText = $matches[1];
+				$errorCode = 99999;
 				$success = false;
 				$needCache = false;
 			} else {
 				// check for error in xml
-				if (preg_match("/\<error.+?\>(.+?)\<\/error\>/i", $serverResponse, $matches) != 0) {
+				if (preg_match("/\<error.+?code=\"(.+?)\"\>(.+?)\<\/error\>/i", $serverResponse, $matches) != 0) {
 					if ($this->mDebugMode == true) {
-						echo "<error> tag detected:\n";
-						echo $matches[1];
-						echo "\n";
+						printf("<error> tag detected: %d - %s\n", $matches[1], $matches[2]);
 					}
 
-					$error = $matches[1];
+					$errorCode = $matches[1];
+					$errorText = $matches[2];
 					$success = false;
 					$needCache = false;
 				} else
@@ -202,7 +203,8 @@ class EveApiCaller {
 							echo "<eveapi> tag not found in xml.\n";
 						}
 
-						$error = 'Data received without <eveapi/> xml';
+						$errorText = 'Data received without <eveapi/> xml';
+						$errorCode = 99999;
 						$success = false;
 						$needCache = false;
 					}
@@ -261,7 +263,7 @@ class EveApiCaller {
 			}
 
 			// create failed answer
-			$result = new FailedCall($error);
+			$result = new FailedCall($errorCode, $errorText);
 		}
 
 		if ($this->mDebugMode == true) {

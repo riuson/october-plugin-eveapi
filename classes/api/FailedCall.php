@@ -13,20 +13,36 @@ class FailedCall {
 	 * @param unknown $_message
 	 *        	Error message
 	 */
-	public function __construct($_message)
+	public function __construct($_code, $_message)
 	{
+		$this->mCode = $_code;
 		$this->mMessage = $_message;
 	}
 
 	/**
 	 *
-	 * @var unknown Error message
+	 * @var integer Error code
+	 */
+	protected $mCode;
+
+	/**
+	 *
+	 * @var string Error message
 	 */
 	protected $mMessage;
 
 	/**
 	 *
-	 * @return \riuson\EveApi\Classes\Api\unknown Error message
+	 * @return integer Error code
+	 */
+	public function code()
+	{
+		return $this->mCode;
+	}
+
+	/**
+	 *
+	 * @return string Error message
 	 */
 	public function message()
 	{

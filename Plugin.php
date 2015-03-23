@@ -29,6 +29,7 @@ class Plugin extends PluginBase {
 		$this->registerConsoleCommand('eveapi.account.apikeyinfo', 'riuson\EveApi\Commands\Account\APIKeyInfo');
 		$this->registerConsoleCommand('eveapi.account.characters', 'riuson\EveApi\Commands\Account\Characters');
 		$this->registerConsoleCommand('eveapi.char.assetlist', 'riuson\EveApi\Commands\Char\AssetList');
+		$this->registerConsoleCommand('eveapi.corp.membertracking', 'riuson\EveApi\Commands\Corp\MemberTracking');
 	}
 
 	public function registerComponents()

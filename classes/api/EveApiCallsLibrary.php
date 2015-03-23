@@ -49,4 +49,13 @@ class EveApiCallsLibrary {
 		));
 		return $result;
 	}
+
+	public static function corp_memberTracking()
+	{
+		$result = new EveApiCallsLibraryItem("/corp/MemberTracking.xml.aspx", 0, "List of corporation members", "riuson\EveApi\Classes\Api\StandardRowset", array(
+			"keyID",
+			"vCode"
+		));
+		return $result;
+	}
 }

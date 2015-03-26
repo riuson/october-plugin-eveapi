@@ -46,7 +46,7 @@ class ServerStatus extends ComponentBase {
 
 		$answer = $caller->call();
 
-		$this->serverOpen = $answer->serverOpen();
-		$this->onlinePlayers = $answer->onlinePlayers();
+		$this->serverOpen = $answer->values->byName('serverOpen');
+		$this->onlinePlayers = $answer->values->byName('onlinePlayers');
 	}
 }

@@ -1,6 +1,7 @@
 <?php namespace riuson\EveApi\Classes\Api\Account;
 
 use riuson\EveApi\Classes\Parser\DataRowset;
+use riuson\EveApi\Classes\Parser\DataValues;
 
 /**
  *
@@ -18,72 +19,45 @@ class APIKeyInfo {
 	 */
 	public function __construct(\DOMXPath $_domPath)
 	{
+		$this->values = new DataValues($_domPath, $_domPath->query('//result')->item(0));
+
 		$nodeRowset = $_domPath->query('/eveapi/result/key/rowset')->item(0);
-		$this->mCharactersRowset = new DataRowset($_domPath, $nodeRowset);
+		$this->charactersRowset = new DataRowset($_domPath, $nodeRowset);
 
 		$nodeKey = $_domPath->query('/eveapi/result/key')->item(0);
-		$this->mAccessMask = $nodeKey->getAttribute('accessMask');
-		$this->mType = $nodeKey->getAttribute('type');
-		$this->mExpires = \DateTime::createFromFormat('Y-m-d H:i:s', $nodeKey->getAttribute('expires'), new \DateTimeZone('UTC'));
+		$this->accessMask = $nodeKey->getAttribute('accessMask');
+		$this->type = $nodeKey->getAttribute('type');
+		$this->expires = \DateTime::createFromFormat('Y-m-d H:i:s', $nodeKey->getAttribute('expires'), new \DateTimeZone('UTC'));
 	}
 
 	/**
 	 *
 	 * @var integer The bitwise number of the calls the API key can query
 	 */
-	protected $mAccessMask;
+	public $accessMask;
 
 	/**
 	 *
 	 * @var string The access level of the API key (ex. Account, Character, Corporation)
 	 */
-	protected $mType;
+	public $type;
 
 	/**
 	 *
 	 * @var \DateTime The date the API key expires. This value will be empty if the key is not set to expire.
 	 */
-	protected $mExpires;
+	public $expires;
 
 	/**
 	 *
 	 * @var DataRowset Characters list exposed by API key
 	 */
-	protected $mCharactersRowset;
+	public $charactersRowset;
 
 	/**
+	 * Simple values list
 	 *
-	 * @return integer The bitwise number of the calls the API key can query
+	 * @var riuson\EveApi\Classes\Parser\DataValues
 	 */
-	public function accessMask()
-	{
-		return $this->mAccessMask;
-	}
-
-	/**
-	 *
-	 * @return string The access level of the API key (ex. Account, Character, Corporation)
-	 */
-	public function type()
-	{
-		return $this->mType;
-	}
-
-	/**
-	 *
-	 * @return DateTime The date the API key expires. This value will be empty if the key is not set to expire.
-	 */
-	public function expires()
-	{
-		return $this->mExpires;
-	}
-
-	/**
-	 *
-	 * @return DataRowset Returns characters list exposed by API key
-	 */
-	public function rowset()
-	{
-		return $this->mCharactersRowset;
-	}
+	public $values;
 }

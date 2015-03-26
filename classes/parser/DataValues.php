@@ -38,12 +38,12 @@ class DataValues {
 
 	private $mValues;
 
-	public function values()
+	public function all()
 	{
 		return $this->mValues;
 	}
 
-	public function value($_name)
+	public function byName($_name)
 	{
 		if (array_key_exists($_name, $this->mValues)) {
 			return $this->mValues[$_name];

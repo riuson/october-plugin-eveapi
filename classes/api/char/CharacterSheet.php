@@ -1,6 +1,5 @@
 <?php namespace riuson\EveApi\Classes\Api\Char;
 
-use Carbon\Carbon;
 use riuson\EveApi\Classes\Parser\DataValues;
 use riuson\EveApi\Classes\Parser\DataRowset;
 
@@ -28,9 +27,9 @@ class CharacterSheet {
 		$this->corporationTitles = new DataRowset($_domPath, $_domPath->query('/eveapi/result/rowset[@name = "corporationTitles"]')->item(0));
 	}
 
-
 	/**
 	 * Simple values list
+	 *
 	 * @var riuson\EveApi\Classes\Parser\DataValues
 	 */
 	public $values;
@@ -44,24 +43,28 @@ class CharacterSheet {
 
 	/**
 	 * Jump clones
+	 *
 	 * @var riuson\EveApi\Classes\Parser\DataRowset
 	 */
 	public $jumpClones;
 
 	/**
 	 * Jump clone implants
+	 *
 	 * @var riuson\EveApi\Classes\Parser\DataRowset
 	 */
 	public $jumpCloneImplants;
 
 	/**
 	 * Current implants
+	 *
 	 * @var riuson\EveApi\Classes\Parser\DataRowset
 	 */
 	public $implants;
 
 	/**
 	 * Learned skills
+	 *
 	 * @var riuson\EveApi\Classes\Parser\DataRowset
 	 */
 	public $skills;

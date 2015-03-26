@@ -1,5 +1,7 @@
 <?php namespace riuson\EveApi\Classes\Api\Account;
 
+use riuson\EveApi\Classes\Parser\DataValues;
+
 class AccountStatus {
 
 	/**
@@ -9,78 +11,15 @@ class AccountStatus {
 	 * @param \DOMXPath $domPath
 	 *        	XPath for source document with data
 	 */
-	public function __construct($domPath)
+	public function __construct($_domPath)
 	{
-		$paidUntilValue = $domPath->query('//result/paidUntil')->item(0)->nodeValue;
-		$this->mPaidUntil = \DateTime::createFromFormat('Y-m-d H:i:s', $paidUntilValue, new \DateTimeZone('UTC'));
-
-		$createDateValue = $domPath->query('//result/createDate')->item(0)->nodeValue;
-		$this->mCreateDate = \DateTime::createFromFormat('Y-m-d H:i:s', $createDateValue, new \DateTimeZone('UTC'));
-
-		$logonCountValue = $domPath->query('//result/logonCount')->item(0)->nodeValue;
-		$this->mLogonCount = intval($logonCountValue);
-
-		$logonMinutesValue = $domPath->query('//result/logonMinutes')->item(0)->nodeValue;
-		$this->mLogonMinutes = intval($logonMinutesValue);
+		$this->values = new DataValues($_domPath, $_domPath->query('//result')->item(0));
 	}
 
 	/**
+	 * Simple values list
 	 *
-	 * @var Account datetime paid until
+	 * @var riuson\EveApi\Classes\Parser\DataValues
 	 */
-	protected $mPaidUntil;
-
-	/**
-	 *
-	 * @var Create date
-	 */
-	protected $mCreateDate;
-
-	/**
-	 *
-	 * @var Logon count
-	 */
-	protected $mLogonCount;
-
-	/**
-	 *
-	 * @var Logon minutes
-	 */
-	protected $mLogonMinutes;
-
-	/**
-	 *
-	 * @return \DateTime Account datetime paid until
-	 */
-	public function paidUntil()
-	{
-		return $this->mPaidUntil;
-	}
-
-	/**
-	 *
-	 * @return \DateTime Create date
-	 */
-	public function createDate()
-	{
-		return $this->mCreateDate;
-	}
-
-	/**
-	 *
-	 * @return integer Logon count
-	 */
-	public function logonCount()
-	{
-		return $this->mLogonCount;
-	}
-
-	/**
-	 *
-	 * @return integer Logon minutes
-	 */
-	public function logonMinutes()
-	{
-		return $this->mLogonMinutes;
-	}
+	public $values;
 }

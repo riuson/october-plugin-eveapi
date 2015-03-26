@@ -50,6 +50,16 @@ class EveApiCallsLibrary {
 		return $result;
 	}
 
+	public static function char_characterSheet()
+	{
+		$result = new EveApiCallsLibraryItem("/char/CharacterSheet.xml.aspx", 0, "Character sheet data", "riuson\EveApi\Classes\Api\Char\CharacterSheet", array(
+			"keyID",
+			"vCode",
+			"characterID"
+		));
+		return $result;
+	}
+
 	public static function corp_memberTracking()
 	{
 		$result = new EveApiCallsLibraryItem("/corp/MemberTracking.xml.aspx", 0, "List of corporation members", "riuson\EveApi\Classes\Api\StandardRowset", array(

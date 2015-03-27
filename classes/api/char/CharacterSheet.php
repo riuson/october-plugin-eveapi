@@ -15,7 +15,7 @@ class CharacterSheet {
 	public function __construct($_domPath)
 	{
 		$this->values = new DataValues($_domPath, $_domPath->query('//result')->item(0));
-		$this->attributes = new DataValues($_domPath, $_domPath->query('//result/attributes')->item(0));
+		$this->headAttributes = new DataValues($_domPath, $_domPath->query('//result/attributes')->item(0));
 		$this->jumpClones = new DataRowset($_domPath, $_domPath->query('/eveapi/result/rowset[@name = "jumpClones"]')->item(0));
 		$this->jumpCloneImplants = new DataRowset($_domPath, $_domPath->query('/eveapi/result/rowset[@name = "jumpCloneImplants"]')->item(0));
 		$this->implants = new DataRowset($_domPath, $_domPath->query('/eveapi/result/rowset[@name = "implants"]')->item(0));
@@ -39,7 +39,7 @@ class CharacterSheet {
 	 *
 	 * @var riuson\EveApi\Classes\Parser\DataValues
 	 */
-	public $attributes;
+	public $headAttributes;
 
 	/**
 	 * Jump clones

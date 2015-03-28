@@ -68,4 +68,14 @@ class EveApiCallsLibrary {
 		));
 		return $result;
 	}
+
+	public static function eve_characterInfo()
+	{
+		$result = new EveApiCallsLibraryItem("/eve/CharacterInfo.xml.aspx", 0, "Public and private character info", "riuson\EveApi\Classes\Api\Eve\CharacterInfo", array(
+			"keyID",
+			"vCode",
+			"characterID"
+		));
+		return $result;
+	}
 }

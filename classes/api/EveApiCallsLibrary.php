@@ -60,6 +60,16 @@ class EveApiCallsLibrary {
 		return $result;
 	}
 
+	public static function char_skillTraining()
+	{
+		$result = new EveApiCallsLibraryItem("/char/SkillInTraining.xml.aspx", 0, "Current skill in training", "riuson\EveApi\Classes\Api\Char\SkillTraining", array(
+			"keyID",
+			"vCode",
+			"characterID"
+		));
+		return $result;
+	}
+
 	public static function corp_memberTracking()
 	{
 		$result = new EveApiCallsLibraryItem("/corp/MemberTracking.xml.aspx", 0, "List of corporation members", "riuson\EveApi\Classes\Api\StandardRowset", array(
@@ -72,10 +82,14 @@ class EveApiCallsLibrary {
 	public static function eve_characterInfo()
 	{
 		$result = new EveApiCallsLibraryItem("/eve/CharacterInfo.xml.aspx", 0, "Public and private character info", "riuson\EveApi\Classes\Api\Eve\CharacterInfo", array(
-			"keyID",
-			"vCode",
 			"characterID"
 		));
+		return $result;
+	}
+
+	public static function eve_conquerableStationsList()
+	{
+		$result = new EveApiCallsLibraryItem("/eve/ConquerableStationList.xml.aspx", 0, "Conquerable Station List (Includes Outposts)", "riuson\EveApi\Classes\Api\Eve\ConquerableStations");
 		return $result;
 	}
 }

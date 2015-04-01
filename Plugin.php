@@ -30,6 +30,7 @@ class Plugin extends PluginBase {
 		$this->registerConsoleCommand('eveapi.account.characters', 'riuson\EveApi\Commands\Account\Characters');
 		$this->registerConsoleCommand('eveapi.char.assetlist', 'riuson\EveApi\Commands\Char\AssetList');
 		$this->registerConsoleCommand('eveapi.char.charactersheet', 'riuson\EveApi\Commands\Char\CharacterSheet');
+		$this->registerConsoleCommand('eveapi.char.skilltraining', 'riuson\EveApi\Commands\Char\SkillTraining');
 		$this->registerConsoleCommand('eveapi.corp.membertracking', 'riuson\EveApi\Commands\Corp\MemberTracking');
 		$this->registerConsoleCommand('eveapi.eve.characterinfo', 'riuson\EveApi\Commands\Eve\CharacterInfo');
 		$this->registerConsoleCommand('eveapi.eve.conquerable', 'riuson\EveApi\Commands\Eve\ConquerableStations');

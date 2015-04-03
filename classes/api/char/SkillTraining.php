@@ -11,9 +11,9 @@ class SkillTraining {
 	 * @param \DOMXPath $domPath
 	 *        	XPath for source document with data
 	 */
-	public function __construct($_domPath)
+	public function __construct($domPath)
 	{
-		$this->values = new DataValues($_domPath, $_domPath->query('//result')->item(0));
+		$this->values = new DataValues($domPath, $domPath->query('//result')->item(0));
 	}
 
 	/**

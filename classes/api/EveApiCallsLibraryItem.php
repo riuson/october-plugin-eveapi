@@ -9,98 +9,53 @@ class EveApiCallsLibraryItem {
 	 *
 	 * @var Uri of the API request
 	 */
-	protected $mUri = null;
+	public $uri = null;
 
 	/**
 	 *
 	 * @var Access mask of the key, required for request
 	 */
-	protected $mAccessMask = 0;
+	public $accessMask = 0;
 
 	/**
 	 *
 	 * @var Common name of the API function
 	 */
-	protected $mCommonName = null;
+	public $commonName = null;
 
 	/**
 	 *
 	 * @var List of required parameters for API call
 	 */
-	protected $mRequiredParameters = null;
+	public $requiredParameters = null;
 
 	/**
 	 *
 	 * @var Name of class for answer
 	 */
-	protected $mAnswerClassName = '';
+	public $answerClassName = '';
 
 	/**
 	 * Constructor with credentials.
 	 *
-	 * @param string $_uri
+	 * @param string $uri
 	 *        	Access mask of the key, required for request
 	 *
-	 * @param int $_accessMask
+	 * @param int $accessMask
 	 *        	Access mask of the key, required for request
 	 *
-	 * @param string $_commonName
+	 * @param string $commonName
 	 *        	Common name of the API function
 	 *
-	 * @param array $_parameters
+	 * @param array $parameters
 	 *        	List of required parameters for API call
 	 */
-	public function __construct($_uri, $_accessMask, $_commonName, $_answerClassName, $_parameters = array())
+	public function __construct($uri, $accessMask, $commonName, $answerClassName, $parameters = array())
 	{
-		$this->mUri = $_uri;
-		$this->mAccessMask = $_accessMask;
-		$this->mCommonName = $_commonName;
-		$this->mAnswerClassName = $_answerClassName;
-		$this->mRequiredParameters = $_parameters;
-	}
-
-	/**
-	 *
-	 * @return string Gets Uri of the API request
-	 */
-	public function uri()
-	{
-		return $this->mUri;
-	}
-
-	/**
-	 *
-	 * @return integer Gets access mask of the key, required for request
-	 */
-	public function accessMask()
-	{
-		return $this->mAccessMask;
-	}
-
-	/**
-	 *
-	 * @return string Common name of the API function
-	 */
-	public function commonName()
-	{
-		return $this->mCommonName;
-	}
-
-	/**
-	 *
-	 * @return array List of required parameters for API call
-	 */
-	public function requiredParameters()
-	{
-		return $this->mRequiredParameters;
-	}
-
-	/**
-	 *
-	 * @return string Class name of the answer
-	 */
-	public function answerClassName()
-	{
-		return $this->mAnswerClassName;
+		$this->uri = $uri;
+		$this->accessMask = $accessMask;
+		$this->commonName = $commonName;
+		$this->answerClassName = $answerClassName;
+		$this->requiredParameters = $parameters;
 	}
 }

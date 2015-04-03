@@ -12,19 +12,19 @@ class CharacterSheet {
 	 * @param \DOMXPath $domPath
 	 *        	XPath for source document with data
 	 */
-	public function __construct($_domPath)
+	public function __construct($domPath)
 	{
-		$this->values = new DataValues($_domPath, $_domPath->query('//result')->item(0));
-		$this->headAttributes = new DataValues($_domPath, $_domPath->query('//result/attributes')->item(0));
-		$this->jumpClones = new DataRowset($_domPath, $_domPath->query('/eveapi/result/rowset[@name = "jumpClones"]')->item(0));
-		$this->jumpCloneImplants = new DataRowset($_domPath, $_domPath->query('/eveapi/result/rowset[@name = "jumpCloneImplants"]')->item(0));
-		$this->implants = new DataRowset($_domPath, $_domPath->query('/eveapi/result/rowset[@name = "implants"]')->item(0));
-		$this->skills = new DataRowset($_domPath, $_domPath->query('/eveapi/result/rowset[@name = "skills"]')->item(0));
-		$this->certificates = new DataRowset($_domPath, $_domPath->query('/eveapi/result/rowset[@name = "certificates"]')->item(0));
-		$this->corporationRolesAtHQ = new DataRowset($_domPath, $_domPath->query('/eveapi/result/rowset[@name = "corporationRolesAtHQ"]')->item(0));
-		$this->corporationRolesAtBase = new DataRowset($_domPath, $_domPath->query('/eveapi/result/rowset[@name = "corporationRolesAtBase"]')->item(0));
-		$this->corporationRolesAtOther = new DataRowset($_domPath, $_domPath->query('/eveapi/result/rowset[@name = "corporationRolesAtOther"]')->item(0));
-		$this->corporationTitles = new DataRowset($_domPath, $_domPath->query('/eveapi/result/rowset[@name = "corporationTitles"]')->item(0));
+		$this->values = new DataValues($domPath, $domPath->query('//result')->item(0));
+		$this->headAttributes = new DataValues($domPath, $domPath->query('//result/attributes')->item(0));
+		$this->jumpClones = new DataRowset($domPath, $domPath->query('/eveapi/result/rowset[@name = "jumpClones"]')->item(0));
+		$this->jumpCloneImplants = new DataRowset($domPath, $domPath->query('/eveapi/result/rowset[@name = "jumpCloneImplants"]')->item(0));
+		$this->implants = new DataRowset($domPath, $domPath->query('/eveapi/result/rowset[@name = "implants"]')->item(0));
+		$this->skills = new DataRowset($domPath, $domPath->query('/eveapi/result/rowset[@name = "skills"]')->item(0));
+		$this->certificates = new DataRowset($domPath, $domPath->query('/eveapi/result/rowset[@name = "certificates"]')->item(0));
+		$this->corporationRolesAtHQ = new DataRowset($domPath, $domPath->query('/eveapi/result/rowset[@name = "corporationRolesAtHQ"]')->item(0));
+		$this->corporationRolesAtBase = new DataRowset($domPath, $domPath->query('/eveapi/result/rowset[@name = "corporationRolesAtBase"]')->item(0));
+		$this->corporationRolesAtOther = new DataRowset($domPath, $domPath->query('/eveapi/result/rowset[@name = "corporationRolesAtOther"]')->item(0));
+		$this->corporationTitles = new DataRowset($domPath, $domPath->query('/eveapi/result/rowset[@name = "corporationTitles"]')->item(0));
 	}
 
 	/**

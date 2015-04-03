@@ -29,27 +29,27 @@ class EveApiUserData {
 	/**
 	 * Constructor with credentials and userId.
 	 *
-	 * @param integer $_keyId
+	 * @param integer $keyId
 	 *        	The ID of the Customizable API Key for authentication, found at: https://support.eveonline.com/api
 	 *
-	 * @param string $_vCode
+	 * @param string $vCode
 	 *        	The user defined or CCP generated Verification Code for the Customizable API Key, found at https://support.eveonline.com/api
 	 *
-	 * @param integer $_characterId
+	 * @param integer $characterId
 	 *        	The ID of the character for the requested data, from Character List. Only for /Char/ endpoints. Optional when the API Key is only valid for a single character.
 	 */
-	public function __construct($_keyId = null, $_vCode = null, $_characterId = 0)
+	public function __construct($keyId = null, $vCode = null, $characterId = 0)
 	{
-		if ($_keyId == null || intval($_keyId) == 0) {
+		if ($keyId == null || intval($keyId) == 0) {
 			throw new \Exception("keyID can't be equals to zero or null.");
 		}
 
-		if (empty($_vCode)) {
+		if (empty($vCode)) {
 			throw new \Exception("vCode can't be empty");
 		}
 
-		$this->keyId = $_keyId;
-		$this->verificationCode = $_vCode;
-		$this->characterId = $_characterId;
+		$this->keyId = $keyId;
+		$this->verificationCode = $vCode;
+		$this->characterId = $characterId;
 	}
 }

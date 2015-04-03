@@ -51,39 +51,39 @@ class EveApiCaller {
 	/**
 	 * Constructor of caller.
 	 *
-	 * @param \riuson\EveApi\Classes\EveApiCallsLibraryItem $_methodData
+	 * @param \riuson\EveApi\Classes\EveApiCallsLibraryItem $methodData
 	 *        	Static information about api call.
 	 *
-	 * @param array $_callData
+	 * @param array $callData
 	 *        	Parameters for call.
 	 *
-	 * @param \riuson\EveApi\Classes\EveApiUserData $_userData
+	 * @param \riuson\EveApi\Classes\EveApiUserData $userData
 	 *        	User data for protected calls.
 	 */
-	public function __construct($_methodData, $_callData = array(), $_userData = null)
+	public function __construct($methodData, $callData = array(), $userData = null)
 	{
-		if ($_methodData == null) {
+		if ($methodData == null) {
 			throw new \Exception("Method data missing");
 		}
 
 		$this->mDebugMode = false;
-		$this->mApiMethodData = $_methodData;
-		$this->mCallData = $_callData;
-		$this->mUserCredentials = $_userData;
+		$this->mApiMethodData = $methodData;
+		$this->mCallData = $callData;
+		$this->mUserCredentials = $userData;
 
 		$this->mParameters = $this->mCallData;
 
 		// if user credendtials present, add to parameters
-		if ($_userData != null) {
-			$this->mParameters["keyID"] = $_userData->keyId;
-			$this->mParameters["vCode"] = $_userData->verificationCode;
+		if ($userData != null) {
+			$this->mParameters["keyID"] = $userData->keyId;
+			$this->mParameters["vCode"] = $userData->verificationCode;
 
-			if ($_userData->characterId != 0) {
-				$this->mParameters["characterID"] = $_userData->characterId;
+			if ($userData->characterId != 0) {
+				$this->mParameters["characterID"] = $userData->characterId;
 			}
 		}
 
-		foreach ($_methodData->requiredParameters() as $key) {
+		foreach ($methodData->requiredParameters() as $key) {
 			if (! array_key_exists($key, $this->mParameters)) {
 				throw new \Exception(sprintf("Parameter '%s' missing", $key));
 			}
@@ -117,29 +117,26 @@ class EveApiCaller {
 		}
 
 		// check for cached answer
-		$cachedRecord = Cache::where('uri', '=', $targetUrlWS)->orderBy('cached', 'DESC')
-			->take(1)
-			->get();
+		$cachedRecord = Cache::where('uri', '=', $targetUrlWS)
+			->orderBy('cached', 'DESC')
+			->first();
 
 		// if cached record not found
-		if ($cachedRecord->isEmpty()) {
+		if (empty($cachedRecord)) {
 			if ($this->mDebugMode == true) {
 				echo "Cache empty. Need reload...\n";
 			}
 
 			$needReload = true;
 		} else { // found
-			$cached = $cachedRecord[0]->cached;
-			$cachedUntil = $cachedRecord[0]->cachedUntil;
+			$cached = $cachedRecord->cached;
+			$cachedUntil = $cachedRecord->cachedUntil;
 			$now = Carbon::now('UTC');
 
 			if ($this->mDebugMode == true) {
-				echo "Cached record found.\n";
-				echo "Cached until: ";
-				print_r($cachedUntil);
-				echo "\nCurrent time: ";
-				print_r($now);
-				echo "\n";
+				printf("Cached record found.\nCached until: %s\nCurrent time: %s\n",
+					print_r($cachedUntil, true),
+					print_r($now, true));
 			}
 
 			if ($cachedUntil < $now) {
@@ -153,7 +150,7 @@ class EveApiCaller {
 					echo "Get from cache.\n";
 				}
 
-				$serverResponse = $cachedRecord[0]->result;
+				$serverResponse = $cachedRecord->result;
 				$success = true;
 				$needCache = false;
 			}
@@ -280,8 +277,8 @@ class EveApiCaller {
 		Cache::where('cachedUntil', '<', $beforeTime)->delete();
 	}
 
-	public function setDebug($_value)
+	public function setDebug($enabled)
 	{
-		$this->mDebugMode = $_value;
+		$this->mDebugMode = $enabled;
 	}
 }

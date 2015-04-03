@@ -10,42 +10,24 @@ class FailedCall {
 
 	/**
 	 *
-	 * @param unknown $_message
+	 * @param unknown $errorText
 	 *        	Error message
 	 */
-	public function __construct($_code, $_message)
+	public function __construct($errorCode, $errorText)
 	{
-		$this->mCode = $_code;
-		$this->mMessage = $_message;
+		$this->errorCode = $errorCode;
+		$this->errorText = $errorText;
 	}
 
 	/**
 	 *
 	 * @var integer Error code
 	 */
-	protected $mCode;
+	public $errorCode;
 
 	/**
 	 *
 	 * @var string Error message
 	 */
-	protected $mMessage;
-
-	/**
-	 *
-	 * @return integer Error code
-	 */
-	public function code()
-	{
-		return $this->mCode;
-	}
-
-	/**
-	 *
-	 * @return string Error message
-	 */
-	public function message()
-	{
-		return $this->mMessage;
-	}
+	public $errorText;
 }

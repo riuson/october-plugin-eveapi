@@ -12,10 +12,10 @@ class CharacterInfo {
 	 * @param \DOMXPath $domPath
 	 *        	XPath for source document with data
 	 */
-	public function __construct($_domPath)
+	public function __construct($domPath)
 	{
-		$this->values = new DataValues($_domPath, $_domPath->query('//result')->item(0));
-		$this->employmentHistory = new DataRowset($_domPath, $_domPath->query('/eveapi/result/rowset[@name = "employmentHistory"]')->item(0));
+		$this->values = new DataValues($domPath, $domPath->query('//result')->item(0));
+		$this->employmentHistory = new DataRowset($domPath, $domPath->query('/eveapi/result/rowset[@name = "employmentHistory"]')->item(0));
 	}
 
 	/**

@@ -11,10 +11,10 @@ class ConquerableStations {
 	 * @param \DOMXPath $domPath
 	 *        	XPath for source document with data
 	 */
-	public function __construct($_domPath)
+	public function __construct($domPath)
 	{
-		$this->values = new DataValues($_domPath, $_domPath->query('//result')->item(0));
-		$this->stations = new DataRowset($_domPath, $_domPath->query('/eveapi/result/rowset[@name = "outposts"]')->item(0));
+		$this->values = new DataValues($domPath, $domPath->query('//result')->item(0));
+		$this->stations = new DataRowset($domPath, $domPath->query('/eveapi/result/rowset[@name = "outposts"]')->item(0));
 	}
 
 	/**

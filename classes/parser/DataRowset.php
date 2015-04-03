@@ -9,23 +9,23 @@ class DataRowset {
 
 	/**
 	 *
-	 * @param \DOMXPath $_domPath
+	 * @param \DOMXPath $domPath
 	 *        	XPath for parent DOM document
-	 * @param \DOMNode $_rowsetNode
+	 * @param \DOMNode $rowsetNode
 	 *        	Root rowset's node for relative queries
 	 */
-	public function __construct($_domPath, $_rowsetNode)
+	public function __construct($domPath, $rowsetNode)
 	{
-		$this->mName = $_rowsetNode->getAttribute('name');
-		$this->mKey = $_rowsetNode->getAttribute('key');
-		$this->mColumns = explode(',', $_rowsetNode->getAttribute('columns'));
-		$this->mRows = array();
+		$this->name = $rowsetNode->getAttribute('name');
+		$this->key = $rowsetNode->getAttribute('key');
+		$this->columns = explode(',', $rowsetNode->getAttribute('columns'));
+		$this->rows = array();
 
-		$nodesRow = $_domPath->query("row", $_rowsetNode);
+		$nodesRow = $domPath->query("row", $rowsetNode);
 
 		foreach ($nodesRow as $nodeRow) {
-			$row = new DataRow($_domPath, $nodeRow);
-			array_push($this->mRows, $row);
+			$row = new DataRow($domPath, $nodeRow);
+			array_push($this->rows, $row);
 		}
 	}
 
@@ -33,60 +33,33 @@ class DataRowset {
 	 *
 	 * @var string Name of the rowset
 	 */
-	protected $mName;
+	public $name;
 
 	/**
 	 *
 	 * @var string Key column of the rowset
 	 */
-	protected $mKey;
+	public $key;
 
 	/**
 	 *
 	 * @var array Columns list
 	 */
-	protected $mColumns;
+	public $columns;
 
 	/**
 	 *
 	 * @var array Child rows of rowset
 	 */
-	protected $mRows;
+	public $rows;
 
 	/**
 	 *
-	 * @return string Name of the rowset
+	 * @return \DataRow Child row of rowset by index
 	 */
-	public function name()
+	public function row($index)
 	{
-		return $this->mName;
-	}
-
-	/**
-	 *
-	 * @return string Key column of the rowset
-	 */
-	public function key()
-	{
-		return $this->mKey;
-	}
-
-	/**
-	 *
-	 * @return array: Columns list
-	 */
-	public function columns()
-	{
-		return $this->mColumns;
-	}
-
-	/**
-	 *
-	 * @return array: Child rows of rowset
-	 */
-	public function rows()
-	{
-		return $this->mRows;
+		return $this->rows[$index];
 	}
 
 	/**
@@ -95,6 +68,6 @@ class DataRowset {
 	 */
 	public function rowCount()
 	{
-		return count($this->mRows);
+		return count($this->rows);
 	}
 }

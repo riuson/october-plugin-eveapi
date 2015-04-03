@@ -17,14 +17,14 @@ class APIKeyInfo {
 	 * @param \DOMXPath $domPath
 	 *        	XPath for source document with data
 	 */
-	public function __construct(\DOMXPath $_domPath)
+	public function __construct(\DOMXPath $domPath)
 	{
-		$this->values = new DataValues($_domPath, $_domPath->query('//result')->item(0));
+		$this->values = new DataValues($domPath, $domPath->query('//result')->item(0));
 
-		$nodeRowset = $_domPath->query('/eveapi/result/key/rowset')->item(0);
-		$this->charactersRowset = new DataRowset($_domPath, $nodeRowset);
+		$nodeRowset = $domPath->query('/eveapi/result/key/rowset')->item(0);
+		$this->charactersRowset = new DataRowset($domPath, $nodeRowset);
 
-		$nodeKey = $_domPath->query('/eveapi/result/key')->item(0);
+		$nodeKey = $domPath->query('/eveapi/result/key')->item(0);
 		$this->accessMask = $nodeKey->getAttribute('accessMask');
 		$this->type = $nodeKey->getAttribute('type');
 		$this->expires = \DateTime::createFromFormat('Y-m-d H:i:s', $nodeKey->getAttribute('expires'), new \DateTimeZone('UTC'));

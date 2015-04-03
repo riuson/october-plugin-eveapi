@@ -83,7 +83,7 @@ class EveApiCaller {
 			}
 		}
 
-		foreach ($methodData->requiredParameters() as $key) {
+		foreach ($methodData->requiredParameters as $key) {
 			if (! array_key_exists($key, $this->mParameters)) {
 				throw new \Exception(sprintf("Parameter '%s' missing", $key));
 			}
@@ -93,7 +93,7 @@ class EveApiCaller {
 	public function call()
 	{
 		// base url
-		$targetUrl = $this->mApiUrl . $this->mApiMethodData->uri() . "?";
+		$targetUrl = $this->mApiUrl . $this->mApiMethodData->uri. "?";
 
 		// append to url, GET
 		foreach ($this->mParameters as $k => $v) {
@@ -232,7 +232,7 @@ class EveApiCaller {
 
 				$cachedRecord = new Cache();
 				$cachedRecord->uri = $targetUrlWS;
-				$cachedRecord->method = $this->mApiMethodData->uri();
+				$cachedRecord->method = $this->mApiMethodData->uri;
 				$cachedRecord->cached = $cached;
 				$cachedRecord->cachedUntil = $cachedUntil;
 				$cachedRecord->result = $serverResponse;
@@ -252,7 +252,7 @@ class EveApiCaller {
 				echo "Create answer class instance...\n";
 			}
 
-			$answerClassName = $this->mApiMethodData->answerClassName();
+			$answerClassName = $this->mApiMethodData->answerClassName;
 			$result = new $answerClassName($domPath);
 		} else {
 			if ($this->mDebugMode == true) {

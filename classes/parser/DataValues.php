@@ -4,20 +4,20 @@ use Carbon\Carbon;
 
 class DataValues {
 
-	public function __construct(\DOMXPath $_domPath, $_rootNode)
+	public function __construct(\DOMXPath $domPath, $rootNode)
 	{
 		$values = array();
 
-		$cachedUntl = $_domPath->query('/eveapi/cachedUntil')->item(0)->nodeValue;
-		$currentTime = $_domPath->query('/eveapi/currentTime')->item(0)->nodeValue;
+		$cachedUntil = $domPath->query('/eveapi/cachedUntil')->item(0)->nodeValue;
+		$currentTime = $domPath->query('/eveapi/currentTime')->item(0)->nodeValue;
 
-		if (! empty($cachedUntl) && ! empty($cachedUntl)) {
-			$values['cachedUntil'] = Carbon::createFromFormat('Y-m-d H:i:s', $cachedUntl, 'UTC');
+		if (! empty($cachedUntil) && ! empty($cachedUntil)) {
+			$values['cachedUntil'] = Carbon::createFromFormat('Y-m-d H:i:s', $cachedUntil, 'UTC');
 			$values['currentTime'] = Carbon::createFromFormat('Y-m-d H:i:s', $currentTime, 'UTC');
 		}
 
 		// select nodes without childs and attributes
-		$simpleNodes = $_domPath->query('child::*[not(*)]', $_rootNode);
+		$simpleNodes = $domPath->query('child::*[not(*)]', $rootNode);
 		foreach ($simpleNodes as $simpleNode) {
 			if ($simpleNode->attributes->length == 0) {
 				//printf("%s - %d\n", $simpleNode->nodeName, $simpleNode->attributes->length);
@@ -43,10 +43,10 @@ class DataValues {
 		return $this->mValues;
 	}
 
-	public function byName($_name)
+	public function byName($name)
 	{
-		if (array_key_exists($_name, $this->mValues)) {
-			return $this->mValues[$_name];
+		if (array_key_exists($name, $this->mValues)) {
+			return $this->mValues[$name];
 		}
 
 		return NULL;

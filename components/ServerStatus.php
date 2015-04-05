@@ -2,8 +2,8 @@
 namespace Riuson\EveApi\Components;
 
 use Cms\Classes\ComponentBase;
-use riuson\EveApi\Classes\Api\EveApiCaller;
-use riuson\EveApi\Classes\Api\EveApiCallsLibrary;
+use Riuson\EveApi\Classes\Api\EveApiCaller;
+use Riuson\EveApi\Classes\Api\EveApiCallsLibrary;
 
 class ServerStatus extends ComponentBase
 {

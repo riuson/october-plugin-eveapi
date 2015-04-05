@@ -1,5 +1,5 @@
 <?php
-namespace riuson\EveApi;
+namespace Riuson\EveApi;
 
 use System\Classes\PluginBase;
 
@@ -19,29 +19,29 @@ class Plugin extends PluginBase
         return [
             'name' => 'EveApi',
             'description' => 'PHP interface for EVE API',
-            'author' => 'riuson',
+            'author' => 'Riuson',
             'icon' => 'icon-leaf'
         ];
     }
 
     public function register()
     {
-        $this->registerConsoleCommand('eveapi.server.serverstatus', 'riuson\EveApi\Commands\Server\ServerStatus');
-        $this->registerConsoleCommand('eveapi.account.accountstatus', 'riuson\EveApi\Commands\Account\AccountStatus');
-        $this->registerConsoleCommand('eveapi.account.apikeyinfo', 'riuson\EveApi\Commands\Account\APIKeyInfo');
-        $this->registerConsoleCommand('eveapi.account.characters', 'riuson\EveApi\Commands\Account\Characters');
-        $this->registerConsoleCommand('eveapi.char.assetlist', 'riuson\EveApi\Commands\Char\AssetList');
-        $this->registerConsoleCommand('eveapi.char.charactersheet', 'riuson\EveApi\Commands\Char\CharacterSheet');
-        $this->registerConsoleCommand('eveapi.char.skilltraining', 'riuson\EveApi\Commands\Char\SkillTraining');
-        $this->registerConsoleCommand('eveapi.corp.membertracking', 'riuson\EveApi\Commands\Corp\MemberTracking');
-        $this->registerConsoleCommand('eveapi.eve.characterinfo', 'riuson\EveApi\Commands\Eve\CharacterInfo');
-        $this->registerConsoleCommand('eveapi.eve.conquerable', 'riuson\EveApi\Commands\Eve\ConquerableStations');
+        $this->registerConsoleCommand('eveapi.server.serverstatus', 'Riuson\EveApi\Commands\Server\ServerStatus');
+        $this->registerConsoleCommand('eveapi.account.accountstatus', 'Riuson\EveApi\Commands\Account\AccountStatus');
+        $this->registerConsoleCommand('eveapi.account.apikeyinfo', 'Riuson\EveApi\Commands\Account\APIKeyInfo');
+        $this->registerConsoleCommand('eveapi.account.characters', 'Riuson\EveApi\Commands\Account\Characters');
+        $this->registerConsoleCommand('eveapi.char.assetlist', 'Riuson\EveApi\Commands\Char\AssetList');
+        $this->registerConsoleCommand('eveapi.char.charactersheet', 'Riuson\EveApi\Commands\Char\CharacterSheet');
+        $this->registerConsoleCommand('eveapi.char.skilltraining', 'Riuson\EveApi\Commands\Char\SkillTraining');
+        $this->registerConsoleCommand('eveapi.corp.membertracking', 'Riuson\EveApi\Commands\Corp\MemberTracking');
+        $this->registerConsoleCommand('eveapi.eve.characterinfo', 'Riuson\EveApi\Commands\Eve\CharacterInfo');
+        $this->registerConsoleCommand('eveapi.eve.conquerable', 'Riuson\EveApi\Commands\Eve\ConquerableStations');
     }
 
     public function registerComponents()
     {
         return [
-            'riuson\EveApi\Components\ServerStatus' => 'serverStatus'
+            'Riuson\EveApi\Components\ServerStatus' => 'serverStatus'
         ];
     }
 }

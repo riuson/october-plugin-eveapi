@@ -1,5 +1,5 @@
 <?php
-namespace riuson\EveApi\Classes\Api;
+namespace Riuson\EveApi\Classes\Api;
 
 /**
  * Class of answer, indicating failed API call

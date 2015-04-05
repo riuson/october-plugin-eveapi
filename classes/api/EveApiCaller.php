@@ -1,10 +1,10 @@
 <?php
-namespace riuson\EveApi\Classes\Api;
+namespace Riuson\EveApi\Classes\Api;
 
-use riuson\EveApi\Classes\Api\EveApiUserData;
-use riuson\EveApi\Classes\Api\EveApiCallsLibraryItem;
-use riuson\EveApi\Classes\Api\EveApiCallsLibrary;
-use riuson\EveApi\Models;
+use Riuson\EveApi\Classes\Api\EveApiUserData;
+use Riuson\EveApi\Classes\Api\EveApiCallsLibraryItem;
+use Riuson\EveApi\Classes\Api\EveApiCallsLibrary;
+use Riuson\EveApi\Models;
 use Riuson\EveApi\Models\Cache;
 use Carbon\Carbon;
 
@@ -53,13 +53,13 @@ class EveApiCaller
     /**
      * Constructor of caller.
      *
-     * @param \riuson\EveApi\Classes\EveApiCallsLibraryItem $methodData
+     * @param \Riuson\EveApi\Classes\EveApiCallsLibraryItem $methodData
      *            Static information about api call.
      *
      * @param array $callData
      *            Parameters for call.
      *
-     * @param \riuson\EveApi\Classes\EveApiUserData $userData
+     * @param \Riuson\EveApi\Classes\EveApiUserData $userData
      *            User data for protected calls.
      */
     public function __construct($methodData, $callData = array(), $userData = null)

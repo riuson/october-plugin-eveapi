@@ -1,8 +1,8 @@
 <?php
-namespace riuson\EveApi\Classes\Api\Account;
+namespace Riuson\EveApi\Classes\Api\Account;
 
-use riuson\EveApi\Classes\Parser\DataRowset;
-use riuson\EveApi\Classes\Parser\DataValues;
+use Riuson\EveApi\Classes\Parser\DataRowset;
+use Riuson\EveApi\Classes\Parser\DataValues;
 
 /**
  *
@@ -59,7 +59,7 @@ class APIKeyInfo
     /**
      * Simple values list
      *
-     * @var riuson\EveApi\Classes\Parser\DataValues
+     * @var Riuson\EveApi\Classes\Parser\DataValues
      */
     public $values;
 }

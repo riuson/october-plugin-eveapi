@@ -1,8 +1,8 @@
 <?php
-namespace riuson\EveApi\Classes\Api\Char;
+namespace Riuson\EveApi\Classes\Api\Char;
 
-use riuson\EveApi\Classes\Parser\DataValues;
-use riuson\EveApi\Classes\Parser\DataRowset;
+use Riuson\EveApi\Classes\Parser\DataValues;
+use Riuson\EveApi\Classes\Parser\DataRowset;
 
 class SkillTraining
 {
@@ -21,7 +21,7 @@ class SkillTraining
     /**
      * Simple values list
      *
-     * @var riuson\EveApi\Classes\Parser\DataValues
+     * @var Riuson\EveApi\Classes\Parser\DataValues
      */
     public $values;
 }

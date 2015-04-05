@@ -1,8 +1,8 @@
 <?php
-namespace riuson\EveApi\Classes\Api\Char;
+namespace Riuson\EveApi\Classes\Api\Char;
 
-use riuson\EveApi\Classes\Parser\DataValues;
-use riuson\EveApi\Classes\Parser\DataRowset;
+use Riuson\EveApi\Classes\Parser\DataValues;
+use Riuson\EveApi\Classes\Parser\DataRowset;
 
 class CharacterSheet
 {
@@ -32,72 +32,72 @@ class CharacterSheet
     /**
      * Simple values list
      *
-     * @var riuson\EveApi\Classes\Parser\DataValues
+     * @var Riuson\EveApi\Classes\Parser\DataValues
      */
     public $values;
 
     /**
      * Attributes
      *
-     * @var riuson\EveApi\Classes\Parser\DataValues
+     * @var Riuson\EveApi\Classes\Parser\DataValues
      */
     public $headAttributes;
 
     /**
      * Jump clones
      *
-     * @var riuson\EveApi\Classes\Parser\DataRowset
+     * @var Riuson\EveApi\Classes\Parser\DataRowset
      */
     public $jumpClones;
 
     /**
      * Jump clone implants
      *
-     * @var riuson\EveApi\Classes\Parser\DataRowset
+     * @var Riuson\EveApi\Classes\Parser\DataRowset
      */
     public $jumpCloneImplants;
 
     /**
      * Current implants
      *
-     * @var riuson\EveApi\Classes\Parser\DataRowset
+     * @var Riuson\EveApi\Classes\Parser\DataRowset
      */
     public $implants;
 
     /**
      * Learned skills
      *
-     * @var riuson\EveApi\Classes\Parser\DataRowset
+     * @var Riuson\EveApi\Classes\Parser\DataRowset
      */
     public $skills;
 
     /**
      *
-     * @var riuson\EveApi\Classes\Parser\DataRowset
+     * @var Riuson\EveApi\Classes\Parser\DataRowset
      */
     public $certificates;
 
     /**
      *
-     * @var riuson\EveApi\Classes\Parser\DataRowset
+     * @var Riuson\EveApi\Classes\Parser\DataRowset
      */
     public $corporationRolesAtHQ;
 
     /**
      *
-     * @var riuson\EveApi\Classes\Parser\DataRowset
+     * @var Riuson\EveApi\Classes\Parser\DataRowset
      */
     public $corporationRolesAtBase;
 
     /**
      *
-     * @var riuson\EveApi\Classes\Parser\DataRowset
+     * @var Riuson\EveApi\Classes\Parser\DataRowset
      */
     public $corporationRolesAtOther;
 
     /**
      *
-     * @var riuson\EveApi\Classes\Parser\DataRowset
+     * @var Riuson\EveApi\Classes\Parser\DataRowset
      */
     public $corporationTitles;
 }

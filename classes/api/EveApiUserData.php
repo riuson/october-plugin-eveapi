@@ -1,10 +1,10 @@
 <?php
-namespace riuson\EveApi\Classes\Api;
+namespace Riuson\EveApi\Classes\Api;
 
 /**
  * User Data for API request
  *
- * @package riuson\EveApi\Classes
+ * @package Riuson\EveApi\Classes
  * @author riuson
  */
 class EveApiUserData

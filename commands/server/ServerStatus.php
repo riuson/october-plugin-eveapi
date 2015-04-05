@@ -1,14 +1,14 @@
 <?php
-namespace riuson\EveApi\Commands\Server;
+namespace Riuson\EveApi\Commands\Server;
 
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
-use riuson\EveApi\Classes\Api\EveApiUserData;
-use riuson\EveApi\Classes\Api\EveApiCallsLibraryItem;
-use riuson\EveApi\Classes\Api\EveApiCallsLibrary;
-use riuson\EveApi\Classes\Api\EveApiCaller;
-use riuson\EveApi\Classes\Api;
+use Riuson\EveApi\Classes\Api\EveApiUserData;
+use Riuson\EveApi\Classes\Api\EveApiCallsLibraryItem;
+use Riuson\EveApi\Classes\Api\EveApiCallsLibrary;
+use Riuson\EveApi\Classes\Api\EveApiCaller;
+use Riuson\EveApi\Classes\Api;
 
 class ServerStatus extends Command
 {

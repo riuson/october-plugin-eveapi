@@ -1,5 +1,5 @@
 <?php
-namespace riuson\EveApi\Classes\Parser;
+namespace Riuson\EveApi\Classes\Parser;
 
 /**
  *

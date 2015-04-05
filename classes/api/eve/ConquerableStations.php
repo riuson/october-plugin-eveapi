@@ -1,8 +1,8 @@
 <?php
-namespace riuson\EveApi\Classes\Api\Eve;
+namespace Riuson\EveApi\Classes\Api\Eve;
 
-use riuson\EveApi\Classes\Parser\DataValues;
-use riuson\EveApi\Classes\Parser\DataRowset;
+use Riuson\EveApi\Classes\Parser\DataValues;
+use Riuson\EveApi\Classes\Parser\DataRowset;
 
 class ConquerableStations
 {
@@ -22,14 +22,14 @@ class ConquerableStations
     /**
      * Simple values list
      *
-     * @var riuson\EveApi\Classes\Parser\DataValues
+     * @var Riuson\EveApi\Classes\Parser\DataValues
      */
     public $values;
 
     /**
      * Stations list
      *
-     * @var riuson\EveApi\Classes\Parser\DataRowset
+     * @var Riuson\EveApi\Classes\Parser\DataRowset
      */
     public $stations;
 }

@@ -1,7 +1,7 @@
 <?php
-namespace riuson\EveApi\Classes\Api;
+namespace Riuson\EveApi\Classes\Api;
 
-use riuson\EveApi\Classes\Parser\DataRowset;
+use Riuson\EveApi\Classes\Parser\DataRowset;
 
 /**
  * Class for typical answer, contaning only rowset

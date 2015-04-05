@@ -44,4 +44,10 @@ class Plugin extends PluginBase
             'Riuson\EveApi\Components\ServerStatus' => 'serverStatus'
         ];
     }
+
+    public function registerSchedule($schedule)
+    {
+        // request server status every 5 minutes
+        $schedule->command('eveapi:server/server-status')->everyFiveMinutes();
+    }
 }

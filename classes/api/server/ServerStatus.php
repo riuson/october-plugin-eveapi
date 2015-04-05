@@ -1,26 +1,28 @@
-<?php namespace riuson\EveApi\Classes\Api\Server;
+<?php
+namespace riuson\EveApi\Classes\Api\Server;
 
 use riuson\EveApi\Classes\Parser\DataValues;
 
-class ServerStatus {
+class ServerStatus
+{
 
-	/**
-	 * Object constructor
-	 *
-	 * @param \DOMXPath $domPath
-	 *        	XPath for source document with data
-	 */
-	public function __construct($domPath)
-	{
-		$this->values = new DataValues($domPath, $domPath->query('//result')->item(0));
+    /**
+     * Object constructor
+     *
+     * @param \DOMXPath $domPath
+     *            XPath for source document with data
+     */
+    public function __construct($domPath)
+    {
+        $this->values = new DataValues($domPath, $domPath->query('//result')->item(0));
 
-		$this->values->all()['serverOpen'] = ($this->values->byName('serverOpen') === 'True' ? true : false);
-	}
+        $this->values->all()['serverOpen'] = ($this->values->byName('serverOpen') === 'True' ? true : false);
+    }
 
-	/**
-	 * Simple values list
-	 *
-	 * @var riuson\EveApi\Classes\Parser\DataValues
-	 */
-	public $values;
+    /**
+     * Simple values list
+     *
+     * @var riuson\EveApi\Classes\Parser\DataValues
+     */
+    public $values;
 }

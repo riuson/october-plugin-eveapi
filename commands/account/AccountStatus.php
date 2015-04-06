@@ -42,7 +42,7 @@ class AccountStatus extends Command
         $keyId = $this->option('keyID');
         $vCode = $this->option('vCode');
 
-        $this->output->writeln(static::class);
+        $this->output->writeln(get_class($this));
 
         try {
             $userCredentials = new EveApiUserData(intval($keyId), $vCode);

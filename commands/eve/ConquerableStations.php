@@ -39,7 +39,7 @@ class ConquerableStations extends Command
     {
         $debug = $this->option('debug');
 
-        $this->output->writeln(static::class);
+        $this->output->writeln(get_class($this));
 
         try {
             $methodInfo = EveApiCallsLibrary::eve_conquerableStationsList();

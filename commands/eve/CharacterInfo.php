@@ -43,7 +43,7 @@ class CharacterInfo extends Command
         $vCode = $this->option('vCode');
         $characterID = $this->option('characterID');
 
-        $this->output->writeln(static::class);
+        $this->output->writeln(get_class($this));
 
         try {
             $userCredentials = new EveApiUserData(intval($keyId), $vCode, $characterID);

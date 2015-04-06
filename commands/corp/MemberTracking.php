@@ -43,7 +43,7 @@ class MemberTracking extends Command
         $vCode = $this->option('vCode');
         $extended = $this->option('extended');
 
-        $this->output->writeln(static::class);
+        $this->output->writeln(get_class($this));
 
         try {
             $callData = array();

@@ -1,14 +1,14 @@
 <?php
-namespace Riuson\EveApi\Classes\Api\Account;
+namespace Riuson\EveApi\Classes\Api\Char;
 
 use Riuson\EveApi\Classes\Parser\DataValues;
+use Riuson\EveApi\Classes\Parser\DataRowset;
 
-class AccountStatus
+class SkillTraining
 {
 
     /**
      * Object constructor
-     * rowset multiCharacterTraining not implemented
      *
      * @param \DOMXPath $domPath
      *            XPath for source document with data

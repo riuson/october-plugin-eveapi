@@ -1,5 +1,5 @@
 <?php
-namespace Riuson\EveApi\Commands\Account;
+namespace Riuson\EveApi\Commands\Eve;
 
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
@@ -8,22 +8,21 @@ use Riuson\EveApi\Classes\Api\EveApiUserData;
 use Riuson\EveApi\Classes\Api\EveApiCallsLibraryItem;
 use Riuson\EveApi\Classes\Api\EveApiCallsLibrary;
 use Riuson\EveApi\Classes\Api\EveApiCaller;
-use Riuson\EveApi\Classes\Api;
 
-class AccountStatus extends Command
+class ConquerableStations extends Command
 {
 
     /**
      *
      * @var string The console command name
      */
-    protected $name = "eveapi:account/account-status";
+    protected $name = "eveapi:eve/conquerable-stations";
 
     /**
      *
      * @var string The console command description
      */
-    protected $description = "Requests user account status.";
+    protected $description = "Returns a conquerable stations list.";
 
     /**
      * Create a new command instance
@@ -39,15 +38,12 @@ class AccountStatus extends Command
     public function fire()
     {
         $debug = $this->option('debug');
-        $keyId = $this->option('keyID');
-        $vCode = $this->option('vCode');
 
         $this->output->writeln(get_class($this));
 
         try {
-            $userCredentials = new EveApiUserData(intval($keyId), $vCode);
-            $methodInfo = EveApiCallsLibrary::account_accountStatus();
-            $caller = new EveApiCaller($methodInfo, array(), $userCredentials);
+            $methodInfo = EveApiCallsLibrary::eve_conquerableStationsList();
+            $caller = new EveApiCaller($methodInfo, array());
 
             if ($debug) {
                 $caller->setDebug(true);
@@ -76,20 +72,6 @@ class AccountStatus extends Command
                 null,
                 InputOption::VALUE_NONE,
                 'Show debug output.',
-                null
-            ],
-            [
-                'keyID',
-                null,
-                InputOption::VALUE_REQUIRED,
-                'EVE API Key ID.',
-                null
-            ],
-            [
-                'vCode',
-                null,
-                InputOption::VALUE_REQUIRED,
-                'EVE API Verification Code.',
                 null
             ]
         ];

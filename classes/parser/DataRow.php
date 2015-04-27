@@ -1,85 +1,60 @@
-<?php namespace riuson\EveApi\Classes\Parser;
+<?php
+namespace Riuson\EveApi\Classes\Parser;
 
 /**
  *
  * @author vladimir
  *         Row for rowset
  */
-class DataRow {
+class DataRow
+{
 
-	/**
-	 *
-	 * @param \DOMXPath $_domPath
-	 *        	XPath for parent DOM document
-	 * @param \DOMNode $_rowsetNode
-	 *        	Root rowset's node for relative queries
-	 */
-	public function __construct($_domPath, $_rowNode)
-	{
-		$this->mValues = array();
-		$this->mHasChild = false;
-		$this->mRowset = null;
+    /**
+     *
+     * @param \DOMXPath $domPath
+     *            XPath for parent DOM document
+     * @param \DOMNode $rowNode
+     *            Root rowset's node for relative queries
+     */
+    public function __construct($domPath, $rowNode)
+    {
+        $this->values = array();
+        $this->hasChild = false;
+        $this->rowset = null;
 
-		foreach ($_rowNode->attributes as $attr) {
-			$this->mValues[$attr->nodeName] = $attr->nodeValue;
-		}
+        foreach ($rowNode->attributes as $attr) {
+            $this->values[$attr->nodeName] = $attr->nodeValue;
+        }
 
-		if ($_rowNode->hasChildNodes()) {
-			$nodesRowset = $_domPath->query('/rowset', $_rowNode);
+        if ($rowNode->hasChildNodes()) {
+            $nodesRowset = $domPath->query('/rowset', $rowNode);
 
-			if ($nodesRowset->length > 1) {
-				throw new Exception('Row has more than one child rowsets.');
-			}
+            if ($nodesRowset->length > 1) {
+                throw new Exception('Row has more than one child rowsets.');
+            }
 
-			if ($nodesRowset->length == 1) {
-				$nodeRowset = $nodesRowset->item(0);
-				$this->mRowset = new DataRowset($_domPath, $nodeRowset);
-			}
-		}
-	}
+            if ($nodesRowset->length == 1) {
+                $nodeRowset = $nodesRowset->item(0);
+                $this->rowset = new DataRowset($domPath, $nodeRowset);
+            }
+        }
+    }
 
-	/**
-	 *
-	 * @var array Values array
-	 */
-	protected $mValues;
+    /**
+     *
+     * @var array Values array
+     */
+    public $values;
 
-	/**
-	 *
-	 * @var bool Has child rowset
-	 */
-	protected $mHasChild;
+    /**
+     *
+     * @var bool Has child rowset
+     */
+    public $hasChild;
 
-	/**
-	 *
-	 * @var DataRowset Child rowset
-	 */
-	protected $mRowset;
-
-	/**
-	 *
-	 * @return array: Values array
-	 */
-	public function values()
-	{
-		return $this->mValues;
-	}
-
-	/**
-	 *
-	 * @return bool: Has child rowset
-	 */
-	public function hasChild()
-	{
-		return $this->mHasChild;
-	}
-
-	/**
-	 *
-	 * @return DataRowset: Child rowset
-	 */
-	public function rowset()
-	{
-		return $this->mRowset;
-	}
+    /**
+     *
+     * @var DataRowset Child rowset
+     */
+    public $rowset;
 }

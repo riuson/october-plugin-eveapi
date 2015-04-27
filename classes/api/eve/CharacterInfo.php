@@ -1,9 +1,10 @@
 <?php
-namespace Riuson\EveApi\Classes\Api\Account;
+namespace Riuson\EveApi\Classes\Api\Eve;
 
 use Riuson\EveApi\Classes\Parser\DataValues;
+use Riuson\EveApi\Classes\Parser\DataRowset;
 
-class AccountStatus
+class CharacterInfo
 {
 
     /**
@@ -16,6 +17,7 @@ class AccountStatus
     public function __construct($domPath)
     {
         $this->values = new DataValues($domPath, $domPath->query('//result')->item(0));
+        $this->employmentHistory = new DataRowset($domPath, $domPath->query('/eveapi/result/rowset[@name = "employmentHistory"]')->item(0));
     }
 
     /**
@@ -24,4 +26,11 @@ class AccountStatus
      * @var Riuson\EveApi\Classes\Parser\DataValues
      */
     public $values;
+
+    /**
+     * Employment history
+     *
+     * @var Riuson\EveApi\Classes\Parser\DataRowset
+     */
+    public $employmentHistory;
 }

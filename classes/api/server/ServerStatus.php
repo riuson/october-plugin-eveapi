@@ -1,49 +1,28 @@
-<?php namespace riuson\EveApi\Classes\Api\Server;
+<?php
+namespace Riuson\EveApi\Classes\Api\Server;
 
-class ServerStatus {
+use Riuson\EveApi\Classes\Parser\DataValues;
 
-	/**
-	 * Object constructor
-	 *
-	 * @param \DOMXPath $domPath
-	 *        	XPath for source document with data
-	 */
-	public function __construct($domPath)
-	{
-		$openedValue = $domPath->query('//result/serverOpen')->item(0)->nodeValue;
-		$this->mServerOpen = $openedValue === 'True' ? true : false;
+class ServerStatus
+{
 
-		$onlineValue = $domPath->query('//result/onlinePlayers')->item(0)->nodeValue;
-		$this->mOnlinePlayers = intval($onlineValue);
-	}
+    /**
+     * Object constructor
+     *
+     * @param \DOMXPath $domPath
+     *            XPath for source document with data
+     */
+    public function __construct($domPath)
+    {
+        $this->values = new DataValues($domPath, $domPath->query('//result')->item(0));
 
-	/**
-	 *
-	 * @var bool Is server online
-	 */
-	protected $mServerOpen;
+        $this->values->all()['serverOpen'] = ($this->values->byName('serverOpen') === 'True' ? true : false);
+    }
 
-	/**
-	 *
-	 * @var integer Number of players online
-	 */
-	protected $mOnlinePlayers;
-
-	/**
-	 *
-	 * @return boolean Is server online
-	 */
-	public function serverOpen()
-	{
-		return $this->mServerOpen;
-	}
-
-	/**
-	 *
-	 * @return number Number of players online
-	 */
-	public function onlinePlayers()
-	{
-		return $this->mOnlinePlayers;
-	}
+    /**
+     * Simple values list
+     *
+     * @var Riuson\EveApi\Classes\Parser\DataValues
+     */
+    public $values;
 }

@@ -1,4 +1,5 @@
-<?php namespace riuson\EveApi\Classes\Api;
+<?php
+namespace Riuson\EveApi\Classes\Api;
 
 /**
  * Class of answer, indicating failed API call
@@ -6,30 +7,29 @@
  * @author vladimir
  *
  */
-class FailedCall {
+class FailedCall
+{
 
-	/**
-	 *
-	 * @param unknown $_message
-	 *        	Error message
-	 */
-	public function __construct($_message)
-	{
-		$this->mMessage = $_message;
-	}
+    /**
+     *
+     * @param unknown $errorText
+     *            Error message
+     */
+    public function __construct($errorCode, $errorText)
+    {
+        $this->errorCode = $errorCode;
+        $this->errorText = $errorText;
+    }
 
-	/**
-	 *
-	 * @var unknown Error message
-	 */
-	protected $mMessage;
+    /**
+     *
+     * @var integer Error code
+     */
+    public $errorCode;
 
-	/**
-	 *
-	 * @return \riuson\EveApi\Classes\Api\unknown Error message
-	 */
-	public function message()
-	{
-		return $this->mMessage;
-	}
+    /**
+     *
+     * @var string Error message
+     */
+    public $errorText;
 }

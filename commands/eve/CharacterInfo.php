@@ -1,5 +1,5 @@
 <?php
-namespace Riuson\EveApi\Commands\Account;
+namespace Riuson\EveApi\Commands\Eve;
 
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
@@ -10,20 +10,20 @@ use Riuson\EveApi\Classes\Api\EveApiCallsLibrary;
 use Riuson\EveApi\Classes\Api\EveApiCaller;
 use Riuson\EveApi\Classes\Api;
 
-class AccountStatus extends Command
+class CharacterInfo extends Command
 {
 
     /**
      *
      * @var string The console command name
      */
-    protected $name = "eveapi:account/account-status";
+    protected $name = "eveapi:eve/character-info";
 
     /**
      *
      * @var string The console command description
      */
-    protected $description = "Requests user account status.";
+    protected $description = "Returns a public character info.";
 
     /**
      * Create a new command instance
@@ -41,12 +41,13 @@ class AccountStatus extends Command
         $debug = $this->option('debug');
         $keyId = $this->option('keyID');
         $vCode = $this->option('vCode');
+        $characterID = $this->option('characterID');
 
         $this->output->writeln(get_class($this));
 
         try {
-            $userCredentials = new EveApiUserData(intval($keyId), $vCode);
-            $methodInfo = EveApiCallsLibrary::account_accountStatus();
+            $userCredentials = new EveApiUserData(intval($keyId), $vCode, $characterID);
+            $methodInfo = EveApiCallsLibrary::eve_characterInfo();
             $caller = new EveApiCaller($methodInfo, array(), $userCredentials);
 
             if ($debug) {
@@ -90,6 +91,13 @@ class AccountStatus extends Command
                 null,
                 InputOption::VALUE_REQUIRED,
                 'EVE API Verification Code.',
+                null
+            ],
+            [
+                'characterID',
+                null,
+                InputOption::VALUE_REQUIRED,
+                'Character ID.',
                 null
             ]
         ];

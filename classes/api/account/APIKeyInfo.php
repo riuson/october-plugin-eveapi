@@ -1,89 +1,65 @@
-<?php namespace riuson\EveApi\Classes\Api\Account;
+<?php
+namespace Riuson\EveApi\Classes\Api\Account;
 
-use riuson\EveApi\Classes\Parser\DataRowset;
+use Riuson\EveApi\Classes\Parser\DataRowset;
+use Riuson\EveApi\Classes\Parser\DataValues;
 
 /**
  *
  * @author vladimir
  *         API Key Info
  */
-class APIKeyInfo {
+class APIKeyInfo
+{
 
-	/**
-	 * Object constructor
-	 * rowset multiCharacterTraining not implemented
-	 *
-	 * @param \DOMXPath $domPath
-	 *        	XPath for source document with data
-	 */
-	public function __construct(\DOMXPath $_domPath)
-	{
-		$nodeRowset = $_domPath->query('/eveapi/result/key/rowset')->item(0);
-		$this->mCharactersRowset = new DataRowset($_domPath, $nodeRowset);
+    /**
+     * Object constructor
+     * rowset multiCharacterTraining not implemented
+     *
+     * @param \DOMXPath $domPath
+     *            XPath for source document with data
+     */
+    public function __construct(\DOMXPath $domPath)
+    {
+        $this->values = new DataValues($domPath, $domPath->query('//result')->item(0));
 
-		$nodeKey = $_domPath->query('/eveapi/result/key')->item(0);
-		$this->mAccessMask = $nodeKey->getAttribute('accessMask');
-		$this->mType = $nodeKey->getAttribute('type');
-		$this->mExpires = \DateTime::createFromFormat('Y-m-d H:i:s', $nodeKey->getAttribute('expires'), new \DateTimeZone('UTC'));
-	}
+        $nodeRowset = $domPath->query('/eveapi/result/key/rowset')->item(0);
+        $this->charactersRowset = new DataRowset($domPath, $nodeRowset);
 
-	/**
-	 *
-	 * @var integer The bitwise number of the calls the API key can query
-	 */
-	protected $mAccessMask;
+        $nodeKey = $domPath->query('/eveapi/result/key')->item(0);
+        $this->accessMask = $nodeKey->getAttribute('accessMask');
+        $this->type = $nodeKey->getAttribute('type');
+        $this->expires = \DateTime::createFromFormat('Y-m-d H:i:s', $nodeKey->getAttribute('expires'), new \DateTimeZone('UTC'));
+    }
 
-	/**
-	 *
-	 * @var string The access level of the API key (ex. Account, Character, Corporation)
-	 */
-	protected $mType;
+    /**
+     *
+     * @var integer The bitwise number of the calls the API key can query
+     */
+    public $accessMask;
 
-	/**
-	 *
-	 * @var \DateTime The date the API key expires. This value will be empty if the key is not set to expire.
-	 */
-	protected $mExpires;
+    /**
+     *
+     * @var string The access level of the API key (ex. Account, Character, Corporation)
+     */
+    public $type;
 
-	/**
-	 *
-	 * @var DataRowset Characters list exposed by API key
-	 */
-	protected $mCharactersRowset;
+    /**
+     *
+     * @var \DateTime The date the API key expires. This value will be empty if the key is not set to expire.
+     */
+    public $expires;
 
-	/**
-	 *
-	 * @return integer The bitwise number of the calls the API key can query
-	 */
-	public function accessMask()
-	{
-		return $this->mAccessMask;
-	}
+    /**
+     *
+     * @var DataRowset Characters list exposed by API key
+     */
+    public $charactersRowset;
 
-	/**
-	 *
-	 * @return string The access level of the API key (ex. Account, Character, Corporation)
-	 */
-	public function type()
-	{
-		return $this->mType;
-	}
-
-	/**
-	 *
-	 * @return DateTime The date the API key expires. This value will be empty if the key is not set to expire.
-	 */
-	public function expires()
-	{
-		return $this->mExpires;
-	}
-
-	/**
-	 *
-	 * @return DataRowset Returns characters list exposed by API key
-	 */
-	public function rowset()
-	{
-		return $this->mCharactersRowset;
-	}
+    /**
+     * Simple values list
+     *
+     * @var Riuson\EveApi\Classes\Parser\DataValues
+     */
+    public $values;
 }

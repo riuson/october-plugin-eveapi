@@ -23,8 +23,8 @@ class ServerStatus extends ComponentBase
     public function componentDetails()
     {
         return [
-            'name' => 'ServerStatus Component',
-            'description' => 'Shows EVE Online Server Status'
+            'name' => 'riuson.eveapi::lang.server_status.name',
+            'description' => 'riuson.eveapi::lang.server_status.description'
         ];
     }
 

@@ -17,8 +17,8 @@ class Plugin extends PluginBase
     public function pluginDetails()
     {
         return [
-            'name' => 'EveApi',
-            'description' => 'PHP interface for EVE API',
+            'name' => 'riuson.eveapi::lang.plugin.name',
+            'description' => 'riuson.eveapi::lang.plugin.description',
             'author' => 'Riuson',
             'icon' => 'icon-leaf'
         ];

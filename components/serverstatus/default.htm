@@ -1,8 +1,8 @@
 Server:
 {% if __SELF__.serverOpen == true %}
-Online
+{{ 'riuson.eveapi::lang.server_status.online'|trans }}
 {% else %}
-Offline
+{{ 'riuson.eveapi::lang.server_status.offline'|trans }}
 {% endif %}
 <br>
-Players: {{ __SELF__.onlinePlayers }}
+{{ 'riuson.eveapi::lang.server_status.players'|trans }}: {{ __SELF__.onlinePlayers }}

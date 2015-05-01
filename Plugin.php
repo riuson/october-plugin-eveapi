@@ -36,6 +36,8 @@ class Plugin extends PluginBase
         $this->registerConsoleCommand('eveapi.corp.membertracking', 'Riuson\EveApi\Commands\Corp\MemberTracking');
         $this->registerConsoleCommand('eveapi.eve.characterinfo', 'Riuson\EveApi\Commands\Eve\CharacterInfo');
         $this->registerConsoleCommand('eveapi.eve.conquerable', 'Riuson\EveApi\Commands\Eve\ConquerableStations');
+        $this->registerConsoleCommand('eveapi.cache.clear', 'Riuson\EveApi\Commands\Cache\CacheClear');
+        $this->registerConsoleCommand('eveapi.cache.crop', 'Riuson\EveApi\Commands\Cache\CacheCrop');
     }
 
     public function registerComponents()
@@ -49,5 +51,7 @@ class Plugin extends PluginBase
     {
         // request server status every 5 minutes
         $schedule->command('eveapi:server/server-status')->everyFiveMinutes();
+        // crop cache
+        $schedule->command('eveapi:cache/crop')->daily();
     }
 }

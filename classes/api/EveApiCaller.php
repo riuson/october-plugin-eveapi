@@ -269,12 +269,6 @@ class EveApiCaller
         return $result;
     }
 
-    private function clearCache()
-    {
-        $beforeTime = Carbon::now('UTC')->subDay(2);
-        Cache::where('cachedUntil', '<', $beforeTime)->delete();
-    }
-
     public function setDebug($enabled)
     {
         $this->mDebugMode = $enabled;

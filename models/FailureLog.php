@@ -50,14 +50,4 @@ class FailureLog extends Model
     public $attachOne = [];
 
     public $attachMany = [];
-
-    public function getDates()
-    {
-        return [
-            'created_at',
-            'updated_at',
-            'cached',
-            'cachedUntil'
-        ];
-    }
 }

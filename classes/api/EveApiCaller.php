@@ -6,6 +6,7 @@ use Riuson\EveApi\Classes\Api\EveApiCallsLibraryItem;
 use Riuson\EveApi\Classes\Api\EveApiCallsLibrary;
 use Riuson\EveApi\Models;
 use Riuson\EveApi\Models\Cache;
+use Riuson\EveApi\Models\FailureLog;
 use Carbon\Carbon;
 
 /**
@@ -259,6 +260,22 @@ class EveApiCaller
 
             // create failed answer
             $result = new FailedCall($errorCode, $errorText);
+
+            // add to log
+            $failureLogRecord = new FailureLog();
+            $failureLogRecord->uri = $targetUrlWS;
+            $failureLogRecord->method = $this->mApiMethodData->uri;
+
+            $p = '';
+            foreach ($this->mParameters as $k => $v) {
+                $p .= $k . ": " . $v . "\n";
+            }
+
+            $failureLogRecord->params = preg_replace('/[\n\r]$/i', '', $p);
+            $failureLogRecord->errorCode = $errorCode;
+            $failureLogRecord->errorText = $errorText;
+
+            $failureLogRecord->save();
         }
 
         if ($this->mDebugMode == true) {

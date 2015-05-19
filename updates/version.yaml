@@ -2,3 +2,6 @@
 1.0.2:
     - Create table cache
     - create_caches_table.php
+1.0.3:
+    - Create table for failures logging
+    - create_failure_logs_table.php

@@ -52,6 +52,12 @@ class EveApiCaller
     protected $mParameters;
 
     /**
+     *
+     * @var string User-Agent, https://developers.eveonline.com/resource/xml-api
+     */
+    protected $mUserAgent = '';
+
+    /**
      * Constructor of caller.
      *
      * @param \Riuson\EveApi\Classes\EveApiCallsLibraryItem $methodData
@@ -165,6 +171,11 @@ class EveApiCaller
             $curl = curl_init();
             curl_setopt($curl, CURLOPT_URL, $targetUrlWS);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+            if (!empty($this->mUserAgent)) {
+                curl_setopt($curl, CURLOPT_USERAGENT, $this->mUserAgent);
+            }
+
             $serverResponse = curl_exec($curl);
             curl_close($curl);
 

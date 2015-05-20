@@ -42,14 +42,6 @@ class EveApiUserData
      */
     public function __construct($keyId = null, $vCode = null, $characterId = 0)
     {
-        if ($keyId == null || intval($keyId) == 0) {
-            throw new \Exception("keyID can't be equals to zero or null.");
-        }
-
-        if (empty($vCode)) {
-            throw new \Exception("vCode can't be empty");
-        }
-
         $this->keyId = $keyId;
         $this->verificationCode = $vCode;
         $this->characterId = $characterId;
